@@ -1,0 +1,17 @@
+INDEX VERSION 1.127+C:\Users\Marcel\Documents\8ASY200 - Systeme distribué\TP\TP2\.metadata\.plugins\org.eclipse.jdt.core
+4108727661.index
+3108431294.index
+1115467115.index
+4041092966.index
+30765161.index
+1697886153.index
+305854171.index
+3133528496.index
+4155206848.index
+3974580528.index
+1498219845.index
+1995173708.index
+163172794.index
+737183524.index
+3065916431.index
+1299022128.index
