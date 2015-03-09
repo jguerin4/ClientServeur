@@ -29,6 +29,31 @@ public class BanqueImpl extends java.rmi.server.UnicastRemoteObject implements
 		// clients = new Hashtable();
 	}
 
+	public static void main(String args[]) throws MalformedURLException,
+			RemoteException {
+		try {
+			File f1 = new File("./bin");
+			String codeBase = f1.getAbsoluteFile().toURI().toURL().toString();
+			System.setProperty("java.rmi.server.codebase", codeBase);
+
+			LocateRegistry.createRegistry(8989);
+			Registry registry = LocateRegistry.getRegistry(8989);
+			BanqueImpl serverReference = new BanqueImpl();
+			registry.rebind("rmi://localhost:8989/AppletRMIBanque",
+					serverReference);
+
+			System.out.println("Rmi enregistré");
+		} catch (MalformedURLException e) {
+			System.out.println("Erreur de formation de l'url");
+			System.out.println(e.toString());
+		} catch (RemoteException e) {
+			System.out.println("Erreur de connexion rmi a distance");
+			System.out.println(e.toString());
+		}
+
+	}
+
+	
 	public void creerCompte(int id, String nom, String prenom, double soldeDepart) throws java.rmi.RemoteException {
 		try {
 
@@ -81,28 +106,19 @@ public class BanqueImpl extends java.rmi.server.UnicastRemoteObject implements
 
 		}
 	}
+	
+	public void afficherCompte(int id) throws java.rmi.RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
 
-	public static void main(String args[]) throws MalformedURLException,
-			RemoteException {
-		try {
-			File f1 = new File("./bin");
-			String codeBase = f1.getAbsoluteFile().toURI().toURL().toString();
-			System.setProperty("java.rmi.server.codebase", codeBase);
+	public void ajoutSomme(int id, double somme) throws java.rmi.RemoteException{
+		// TODO Auto-generated method stub
+		
+	}
 
-			LocateRegistry.createRegistry(8989);
-			Registry registry = LocateRegistry.getRegistry(8989);
-			BanqueImpl serverReference = new BanqueImpl();
-			registry.rebind("rmi://localhost:8989/AppletRMIBanque",
-					serverReference);
-
-			System.out.println("Rmi enregistré");
-		} catch (MalformedURLException e) {
-			System.out.println("Erreur de formation de l'url");
-			System.out.println(e.toString());
-		} catch (RemoteException e) {
-			System.out.println("Erreur de connexion rmi a distance");
-			System.out.println(e.toString());
-		}
-
+	public void retirerSomme(int id, double somme) throws java.rmi.RemoteException{
+		// TODO Auto-generated method stub
+		
 	}
 }
