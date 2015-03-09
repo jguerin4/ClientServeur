@@ -62,7 +62,8 @@ public class BanqueClient extends JApplet implements ActionListener {
 						.getHost(), port);
 				System.out.println("Création d'un compte ....");
 				Banque remoteReference = (Banque) registry.lookup("rmi://localhost:8989/AppletRMIBanque");
-				remoteReference.creerCompte();
+				remoteReference.creerCompte(53,"Bissonette","Bob",50000.57);
+				System.out.println("Compte créer!!");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
