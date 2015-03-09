@@ -21,7 +21,15 @@ public class BanqueClient extends JApplet implements ActionListener {
 	Button CreerCompteButton;
 
 	// Button wrongButton;
-	// TextField nameField;
+	 TextField idFieldTitle;
+	 TextField nomFieldTitle;
+	 TextField prenomFieldTitle;
+	 TextField soldeFieldTitle;
+	 
+	 TextField idField;
+	 TextField nomField;
+	 TextField prenomField;
+	 TextField soldeField;
 	// CheckboxGroup radioGroup;
 	// Checkbox radio1;
 	// Checkbox radio2;
@@ -29,17 +37,48 @@ public class BanqueClient extends JApplet implements ActionListener {
 
 	public void init() {
 		try {
-			System.out.println("In applet!");
 			// Création des assets de l'applet
 			setLayout(new FlowLayout());
 			CreerCompteButton = new Button("Créer un compte");
 			// wrongButton = new Button("Don't click!");
-			// nameField = new TextField("Type here Something",35);
+			idFieldTitle = new TextField("ID:");
+			nomFieldTitle = new TextField("Nom:");
+			prenomFieldTitle = new TextField("Prenom:");
+			soldeFieldTitle = new TextField("Solde:");
+			
+			idField = new TextField("",10);
+			nomField = new TextField("",10);
+			prenomField = new TextField("",10);
+			soldeField = new TextField("",10);
+			
+			
+			
+			idFieldTitle.setEditable(false);
+			nomFieldTitle.setEditable(false);
+			prenomFieldTitle.setEditable(false);
+			soldeFieldTitle.setEditable(false);
+			
+			idField.setEditable(true);
+			nomField.setEditable(true);
+			prenomField.setEditable(true);
+			soldeField.setEditable(true);
 			// radioGroup = new CheckboxGroup();
 			// radio1 = new Checkbox("Red", radioGroup,false);
 			// radio2 = new Checkbox("Blue", radioGroup,true);
 			// radio3 = new Checkbox("Green", radioGroup,false);
 			add(CreerCompteButton);
+			
+			add(idFieldTitle);
+			add(idField);
+			
+			add(nomFieldTitle);
+			add(nomField);
+			
+			add(prenomFieldTitle);
+			add(prenomField);
+			
+			add(soldeFieldTitle);
+			add(soldeField);
 			// add(wrongButton);
 			// add(nameField);
 			// add(radio1);
