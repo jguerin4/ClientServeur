@@ -21,70 +21,63 @@ public class BanqueClient extends JApplet implements ActionListener {
 	Button CreerCompteButton;
 
 	// Button wrongButton;
-	 TextField idFieldTitle;
-	 TextField nomFieldTitle;
-	 TextField prenomFieldTitle;
-	 TextField soldeFieldTitle;
-	 
-	 TextField idField;
-	 TextField nomField;
-	 TextField prenomField;
-	 TextField soldeField;
-	// CheckboxGroup radioGroup;
-	// Checkbox radio1;
-	// Checkbox radio2;
-	// Checkbox radio3;
+	TextField idFieldTitle;
+	TextField nomFieldTitle;
+	TextField prenomFieldTitle;
+	TextField soldeFieldTitle;
+
+	TextField idField;
+	TextField nomField;
+	TextField prenomField;
+	TextField soldeField;
+
+	TextField etatApplet;
 
 	public void init() {
 		try {
 			// Création des assets de l'applet
 			setLayout(new FlowLayout());
 			CreerCompteButton = new Button("Créer un compte");
-			// wrongButton = new Button("Don't click!");
 			idFieldTitle = new TextField("ID:");
 			nomFieldTitle = new TextField("Nom:");
 			prenomFieldTitle = new TextField("Prenom:");
 			soldeFieldTitle = new TextField("Solde:");
-			
-			idField = new TextField("",10);
-			nomField = new TextField("",10);
-			prenomField = new TextField("",10);
-			soldeField = new TextField("",10);
-			
-			
-			
+
+			idField = new TextField("", 10);
+			nomField = new TextField("", 10);
+			prenomField = new TextField("", 10);
+			soldeField = new TextField("", 10);
+
+			etatApplet = new TextField("Applet démarré!", 105);
+
 			idFieldTitle.setEditable(false);
 			nomFieldTitle.setEditable(false);
 			prenomFieldTitle.setEditable(false);
 			soldeFieldTitle.setEditable(false);
-			
+
+			etatApplet.setEditable(false);
+
 			idField.setEditable(true);
 			nomField.setEditable(true);
 			prenomField.setEditable(true);
 			soldeField.setEditable(true);
-			// radioGroup = new CheckboxGroup();
-			// radio1 = new Checkbox("Red", radioGroup,false);
-			// radio2 = new Checkbox("Blue", radioGroup,true);
-			// radio3 = new Checkbox("Green", radioGroup,false);
+
 			add(CreerCompteButton);
-			
+
 			add(idFieldTitle);
 			add(idField);
-			
+
 			add(nomFieldTitle);
 			add(nomField);
-			
+
 			add(prenomFieldTitle);
 			add(prenomField);
-			
+
 			add(soldeFieldTitle);
 			add(soldeField);
-			// add(wrongButton);
-			// add(nameField);
-			// add(radio1);
-			// add(radio2);
-			// add(radio3);
-			
+
+			add(etatApplet);
+
 			CreerCompteButton.addActionListener(this);
 
 		} catch (Exception e) {
@@ -100,9 +93,28 @@ public class BanqueClient extends JApplet implements ActionListener {
 				Registry registry = LocateRegistry.getRegistry(getCodeBase()
 						.getHost(), port);
 				System.out.println("Création d'un compte ....");
-				Banque remoteReference = (Banque) registry.lookup("rmi://localhost:8989/AppletRMIBanque");
-				remoteReference.creerCompte(53,"Bissonette","Bob",50000.57);
-				System.out.println("Compte créer!!");
+				Banque remoteReference = (Banque) registry
+						.lookup("rmi://localhost:8989/AppletRMIBanque");
+
+				int nouveauId;
+				String nouveauNom;
+				String nouveauPrenom;
+				double nouveauSolde;
+
+				nouveauId = Integer.parseInt(idField.getText());
+				nouveauNom = nomField.getText();
+				nouveauPrenom = prenomField.getText();
+				nouveauSolde = Double.parseDouble(soldeField.getText());
+
+				remoteReference.creerCompte(nouveauId, nouveauNom,
+						nouveauPrenom, nouveauSolde);
+
+				etatApplet.setText("Compte créer avec succès avec les valeurs suivantes: " + "\n"
+									+ "ID: " + nouveauId + "\n"
+									+ "Nom: " + nouveauNom + "\n"
+									+ "Prenom: " + nouveauPrenom + "\n"
+									+ "Solde: " + nouveauSolde + "\n");
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
