@@ -1,6 +1,7 @@
 import java.awt.Button;
 import java.awt.Checkbox;
 import java.awt.CheckboxGroup;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
@@ -11,6 +12,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 import javax.swing.JApplet;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
@@ -57,21 +59,28 @@ public class BanqueClient extends JApplet implements ActionListener {
 
 	JTextArea etatApplet;
 
+	
 	public void init() {
+		
 		try {
 			// Création des assets de l'applet
 			setLayout(new FlowLayout(5,10,5));
+			getContentPane().setBackground( Color.orange );
 			
-			
-		
 			// Initialisation Créer compte
 			CreerCompteButton = new Button("Créer un compte");
+			CreerCompteButton.setBackground(java.awt.Color.red);
 			CreerCompteButton.addActionListener(this);
 			
+			
 			idFieldTitle = new TextField("ID:");
+			idFieldTitle.setBackground(Color.yellow);
 			nomFieldTitle = new TextField("Nom:");
+			nomFieldTitle.setBackground(Color.yellow);
 			prenomFieldTitle = new TextField("Prenom:");
+			prenomFieldTitle.setBackground(Color.yellow);
 			soldeFieldTitle = new TextField("Solde:");
+			soldeFieldTitle.setBackground(Color.yellow);
 
 			idField = new TextField("", 10);
 			nomField = new TextField("", 10);
@@ -105,9 +114,12 @@ public class BanqueClient extends JApplet implements ActionListener {
 			//Initialisation Voir les détails d'un compte
 			detailCompteButton = new Button("         Voir les détails d'un compte         ");
 			detailCompteButton.addActionListener(this);
+			detailCompteButton.setBackground(Color.red);
+			
 			
 			idDetailCompteTitle = new TextField("ID du compte à consulter:", 20);
 			idDetailCompte = new TextField("",48);
+			
 			
 			idDetailCompteTitle.setEnabled(false);
 			idDetailCompte.setEnabled(true);
@@ -118,6 +130,7 @@ public class BanqueClient extends JApplet implements ActionListener {
 			
 			//Initialisation Ajouter une somme sur un compte
 			ajouterSomme = new Button("      Ajouter de l'argent à un compte      ");
+			ajouterSomme.setBackground(java.awt.Color.red);
 			
 			idAjouterSommeTitle = new TextField("ID du compte à mettre à jour:",20);
 			idAjouterSommeCompte = new TextField("",5);
@@ -140,6 +153,7 @@ public class BanqueClient extends JApplet implements ActionListener {
 			//Initialisation Retirer une somme d'un compte
 
 			retirerSomme = new Button("      Retirer de l'argent à un compte      ");
+			retirerSomme.setBackground(java.awt.Color.red);
 			
 			idRetirerSommeTitle = new TextField("ID du compte à mettre à jour:",20);
 			idRetirerSommeCompte = new TextField("",5);
@@ -161,6 +175,7 @@ public class BanqueClient extends JApplet implements ActionListener {
 			// Rétroaction sur l'état de l'applet
 			etatApplet = new JTextArea("Applet démarré!", 5,50);
 			etatApplet.setEditable(false);
+			etatApplet.setBackground(Color.LIGHT_GRAY);
 			add(etatApplet);
 
 		} catch (Exception e) {
