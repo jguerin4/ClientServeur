@@ -5,6 +5,6 @@ import java.rmi.RemoteException;
 
 public interface Banque extends Remote
 {
-    String getMessage () throws RemoteException;
+    void creerCompte () throws RemoteException;
 }
 
