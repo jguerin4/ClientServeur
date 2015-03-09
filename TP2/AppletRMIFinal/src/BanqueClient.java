@@ -12,15 +12,16 @@ import java.rmi.registry.Registry;
 
 import javax.swing.JApplet;
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 
 public class BanqueClient extends JApplet implements ActionListener {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	//Créer un compte
 	Button CreerCompteButton;
 
-	// Button wrongButton;
 	TextField idFieldTitle;
 	TextField nomFieldTitle;
 	TextField prenomFieldTitle;
@@ -30,14 +31,43 @@ public class BanqueClient extends JApplet implements ActionListener {
 	TextField nomField;
 	TextField prenomField;
 	TextField soldeField;
+	//Voir les détails d'un compte
+	Button detailCompteButton;
+	
+	TextField idDetailCompteTitle;
+	TextField idDetailCompte;
+	
+	//Ajouter une somme sur un compte
+	Button ajouterSomme;
+	
+	TextField idAjouterSommeTitle;
+	TextField idAjouterSommeCompte;
+	
+	TextField montantAjoutTitle;
+	TextField montantAjout;
+	
+	//Retirer une somme d'un compte
+	Button retirerSomme;
+	
+	TextField idRetirerSommeTitle;
+	TextField idRetirerSommeCompte;
+	
+	TextField montantRetraitTitle;
+	TextField montantRetrait;
 
-	TextField etatApplet;
+	JTextArea etatApplet;
 
 	public void init() {
 		try {
 			// Création des assets de l'applet
-			setLayout(new FlowLayout());
+			setLayout(new FlowLayout(5,10,5));
+			
+			
+		
+			// Initialisation Créer compte
 			CreerCompteButton = new Button("Créer un compte");
+			CreerCompteButton.addActionListener(this);
+			
 			idFieldTitle = new TextField("ID:");
 			nomFieldTitle = new TextField("Nom:");
 			prenomFieldTitle = new TextField("Prenom:");
@@ -48,14 +78,10 @@ public class BanqueClient extends JApplet implements ActionListener {
 			prenomField = new TextField("", 10);
 			soldeField = new TextField("", 10);
 
-			etatApplet = new TextField("Applet démarré!", 105);
-
 			idFieldTitle.setEditable(false);
 			nomFieldTitle.setEditable(false);
 			prenomFieldTitle.setEditable(false);
 			soldeFieldTitle.setEditable(false);
-
-			etatApplet.setEditable(false);
 
 			idField.setEditable(true);
 			nomField.setEditable(true);
@@ -75,10 +101,67 @@ public class BanqueClient extends JApplet implements ActionListener {
 
 			add(soldeFieldTitle);
 			add(soldeField);
+			
+			//Initialisation Voir les détails d'un compte
+			detailCompteButton = new Button("         Voir les détails d'un compte         ");
+			detailCompteButton.addActionListener(this);
+			
+			idDetailCompteTitle = new TextField("ID du compte à consulter:", 20);
+			idDetailCompte = new TextField("",48);
+			
+			idDetailCompteTitle.setEnabled(false);
+			idDetailCompte.setEnabled(true);
+			
+			add(detailCompteButton);
+			add(idDetailCompteTitle);
+			add(idDetailCompte);
+			
+			//Initialisation Ajouter une somme sur un compte
+			ajouterSomme = new Button("      Ajouter de l'argent à un compte      ");
+			
+			idAjouterSommeTitle = new TextField("ID du compte à mettre à jour:",20);
+			idAjouterSommeCompte = new TextField("",5);
+			
+			montantAjoutTitle = new TextField("Montant à ajouter:");
+			montantAjout = new TextField("",15);
+			
+			idAjouterSommeTitle.setEnabled(false);
+			idAjouterSommeCompte.setEnabled(true);
+			montantAjoutTitle.setEnabled(false);
+			montantAjout.setEnabled(true);
+					
+			add(ajouterSomme);
+			add(idAjouterSommeTitle);
+			add(idAjouterSommeCompte);
+			add(montantAjoutTitle);
+			add(montantAjout);
+						
+			
+			//Initialisation Retirer une somme d'un compte
 
+			retirerSomme = new Button("      Retirer de l'argent à un compte      ");
+			
+			idRetirerSommeTitle = new TextField("ID du compte à mettre à jour:",20);
+			idRetirerSommeCompte = new TextField("",5);
+			montantRetraitTitle = new TextField("Montant à retirer:");
+			montantRetrait = new TextField("",15);
+			
+			idRetirerSommeTitle.setEnabled(false);
+			idRetirerSommeCompte.setEnabled(true);
+			montantRetraitTitle.setEnabled(false);
+			montantRetrait.setEnabled(true);
+					
+			add(retirerSomme);
+			add(idRetirerSommeTitle);
+			add(idRetirerSommeCompte);
+			add(montantRetraitTitle);
+			add(montantRetrait);
+			
+			
+			// Rétroaction sur l'état de l'applet
+			etatApplet = new JTextArea("Applet démarré!", 5,50);
+			etatApplet.setEditable(false);
 			add(etatApplet);
-
-			CreerCompteButton.addActionListener(this);
 
 		} catch (Exception e) {
 			throw new RuntimeException(e);
