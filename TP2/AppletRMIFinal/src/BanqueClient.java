@@ -14,10 +14,10 @@ public class BanqueClient extends JApplet
 
 	public void init() {
         try {
-			int port = 5077;
+			int port = 8989;
             Registry registry = LocateRegistry.getRegistry(getCodeBase().getHost(), port);
             System.out.println("In applet!");
-            Banque remoteReference = (Banque) registry.lookup("AppletRMIBanque");
+            Banque remoteReference = (Banque) registry.lookup("rmi://localhost:8989/AppletRMIBanque");
             getContentPane().add(new JLabel(remoteReference.getMessage()));
         }
         catch (Exception e)

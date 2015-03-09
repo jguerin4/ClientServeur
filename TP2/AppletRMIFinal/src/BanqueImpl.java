@@ -39,41 +39,55 @@ public class BanqueImpl extends java.rmi.server.UnicastRemoteObject implements B
    {
         try
         {
-        	ConnectionManager.ajouterConnection("Banque");
-        	connectionBD = ConnectionManager.getInstance("Banque");
+//        	ConnectionManager.ajouterConnection("Banque");
+//        	connectionBD = ConnectionManager.getInstance("Banque");
+//        	
+//        	banqueStmt = connectionBD.createStatement();
         	
-        	banqueStmt = connectionBD.createStatement();
+        	/**
+			 File f1= new File ("./bin");
+			 String codeBase=f1.getAbsoluteFile().toURI().toURL().toString();
+			 System.setProperty("java.rmi.server.codebase", codeBase);
+			
+			 int port = 8989;
+			 System.out.println("In BanqueImpl----!");
+			 Registry registry = LocateRegistry.getRegistry(port);
+			 // Banque remoteReference = (Banque)
+			 UnicastRemoteObject.exportObject(new BanqueImpl());
+			 BanqueImpl remoteReference = new BanqueImpl();
+			 System.out.println("In BanqueImpl!");
+			 registry.rebind("rmi://localhost:8989/AppletRMIBanque",
+			 remoteReference);
+			 System.out.println("In BanqueImpl===============!");
+
+        	/**/
         	
         	File f1= new File ("./bin");
-      	  	String codeBase=f1.getAbsoluteFile().toURI().toURL().toString();
-      	  	System.setProperty("java.rmi.server.codebase", codeBase);
-      	  
-        	int port = 7878;
-        	System.out.println("In BanqueImpl----!");
-            Registry registry = LocateRegistry.getRegistry(port);
-            // Banque remoteReference = (Banque) UnicastRemoteObject.exportObject(new BanqueImpl());
-            BanqueImpl remoteReference = new BanqueImpl();
-            System.out.println("In BanqueImpl!");
-            registry.rebind("rmi://localhost:7878/AppletRMIBanque", remoteReference);
-            System.out.println("In BanqueImpl===============!");
+        	String codeBase=f1.getAbsoluteFile().toURI().toURL().toString();
+        	System.setProperty("java.rmi.server.codebase", codeBase);
+        	
+        	
+        	LocateRegistry.createRegistry(8989);
+        	Registry registry = LocateRegistry.getRegistry(8989);
+        	BanqueImpl serverReference = new BanqueImpl();
+        	
+        	registry.rebind("rmi://localhost:8989/AppletRMIBanque",serverReference);
             
-           
-            
-            requeteSql = "ajouterCompte(1,'Laliberte','Bob')";
-            sqlResult = banqueStmt.executeQuery(requeteSql);
-            
-            if (sqlResult.next()) {
-            	System.out.println("Contenu de la réponse à la requête:");
-		        System.out.println(sqlResult.toString());
-	        }
-
-            sqlResult.close();
-            
+//            requeteSql = "ajouterCompte(1,'Laliberte','Bob')";
+//            sqlResult = banqueStmt.executeQuery(requeteSql);
+//            
+//            if (sqlResult.next()) {
+//            	System.out.println("Contenu de la réponse à la requête:");
+//		        System.out.println(sqlResult.toString());
+//	        }
+//
+//            sqlResult.close();
+//            
         }
-        catch (SQLException e) {
-			System.out.println("Erreur de connexion avec la bd Oracle");
-	
-		}
+//        catch (SQLException e) {
+//			System.out.println("Erreur de connexion avec la bd Oracle");
+//	
+//		}
         catch (MalformedURLException e) {
 			System.out.println("Erreur de formation de l'url");
 	
