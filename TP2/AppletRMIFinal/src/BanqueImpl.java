@@ -11,8 +11,8 @@ import BaseDeDonnee.ConnectionManager;
 public class BanqueImpl extends java.rmi.server.UnicastRemoteObject implements
 		Banque {
 	/**
-	 * Author: Johnny Guérin, Marcel Laliberté et Eric Dionne Based code author:
-	 * Hamid Mcheik
+	 * Author: Johnny Guérin, Marcel Laliberté et Eric Dionne Based on code
+	 * from: Hamid Mcheik
 	 * 
 	 */
 
@@ -29,10 +29,34 @@ public class BanqueImpl extends java.rmi.server.UnicastRemoteObject implements
 		// clients = new Hashtable();
 	}
 
-	public void creerCompte(int id, String nom, String prenom, double soldeDepart) throws java.rmi.RemoteException {
+	public static void main(String args[]) throws MalformedURLException,
+			RemoteException {
 		try {
-
 			ConnectionManager.ajouterConnection("Banque");
+			File f1 = new File("./bin");
+			String codeBase = f1.getAbsoluteFile().toURI().toURL().toString();
+			System.setProperty("java.rmi.server.codebase", codeBase);
+
+			LocateRegistry.createRegistry(8989);
+			Registry registry = LocateRegistry.getRegistry(8989);
+			BanqueImpl serverReference = new BanqueImpl();
+			registry.rebind("rmi://localhost:8989/AppletRMIBanque",
+					serverReference);
+
+			System.out.println("Rmi enregistré");
+		} catch (MalformedURLException e) {
+			System.out.println("Erreur de formation de l'url");
+			System.out.println(e.toString());
+		} catch (RemoteException e) {
+			System.out.println("Erreur de connexion rmi a distance");
+			System.out.println(e.toString());
+		}
+
+	}
+
+	public void creerCompte(int id, String nom, String prenom,
+			double soldeDepart) throws java.rmi.RemoteException {
+		try {
 			connectionBD = ConnectionManager.getInstance("Banque");
 
 			requeteSql = "{call tp2creerCompte(?,?,?,?,?,?)}";
@@ -78,30 +102,159 @@ public class BanqueImpl extends java.rmi.server.UnicastRemoteObject implements
 				} catch (Exception e) {
 					System.out.println(e.toString());
 				}
-
 		}
 	}
 
-	public static void main(String args[]) throws MalformedURLException,
-			RemoteException {
+	public void afficherCompte(int id) throws java.rmi.RemoteException {
 		try {
-			File f1 = new File("./bin");
-			String codeBase = f1.getAbsoluteFile().toURI().toURL().toString();
-			System.setProperty("java.rmi.server.codebase", codeBase);
+			connectionBD = ConnectionManager.getInstance("Banque");
 
-			LocateRegistry.createRegistry(8989);
-			Registry registry = LocateRegistry.getRegistry(8989);
-			BanqueImpl serverReference = new BanqueImpl();
-			registry.rebind("rmi://localhost:8989/AppletRMIBanque",
-					serverReference);
+			// requeteSql = "{call tp2afficherCompte(?,?,?)}";
+			//
+			// callableStatement = connectionBD.prepareCall(requeteSql);
+			//
+			// callableStatement.setInt(1, id);
+			// callableStatement.registerOutParameter(2,
+			// java.sql.Types.INTEGER);
+			// callableStatement.registerOutParameter(3,
+			// java.sql.Types.VARCHAR);
+			//
+			// callableStatement.executeUpdate();
+			//
+			// int resultUpdate = callableStatement.getInt(2);
+			// String errMessage = callableStatement.getNString(3);
+			//
+			// if (resultUpdate != 0) {
+			// System.out.println(errMessage);
+			// }
+			//
+			// else {
+			// System.out.println("Requête effectué avec succès!");
+			// }
+			//
+			// } catch (SQLException e) {
+			// System.out.println("Erreur de connexion avec la bd Oracle:");
+			// System.out.println(e.toString());
+			//
+		}
 
-			System.out.println("Rmi enregistré");
-		} catch (MalformedURLException e) {
-			System.out.println("Erreur de formation de l'url");
-			System.out.println(e.toString());
-		} catch (RemoteException e) {
-			System.out.println("Erreur de connexion rmi a distance");
-			System.out.println(e.toString());
+		finally {
+			if (callableStatement != null)
+				try {
+					callableStatement.close();
+				} catch (Exception e) {
+					System.out.println(e.toString());
+				}
+			if (connectionBD != null)
+				try {
+					connectionBD.close();
+				} catch (Exception e) {
+					System.out.println(e.toString());
+				}
+		}
+
+	}
+
+	public void ajoutSomme(int id, double somme)
+			throws java.rmi.RemoteException {
+		try {
+			connectionBD = ConnectionManager.getInstance("Banque");
+
+			// requeteSql = "{call tp2ajouterSomme(?,?,?,?)}";
+			//
+			// callableStatement = connectionBD.prepareCall(requeteSql);
+			//
+			// callableStatement.setInt(1, id);
+			// callableStatement.setDouble(2, somme);
+			// callableStatement.registerOutParameter(3,
+			// java.sql.Types.INTEGER);
+			// callableStatement.registerOutParameter(4,
+			// java.sql.Types.VARCHAR);
+			//
+			// callableStatement.executeUpdate();
+			//
+			// int resultUpdate = callableStatement.getInt(3);
+			// String errMessage = callableStatement.getNString(4);
+			//
+			// if (resultUpdate != 0) {
+			// System.out.println(errMessage);
+			// }
+			//
+			// else {
+			// System.out.println("Requête effectué avec succès!");
+			// }
+			//
+			// } catch (SQLException e) {
+			// System.out.println("Erreur de connexion avec la bd Oracle:");
+			// System.out.println(e.toString());
+			//
+		}
+
+		finally {
+			if (callableStatement != null)
+				try {
+					callableStatement.close();
+				} catch (Exception e) {
+					System.out.println(e.toString());
+				}
+			if (connectionBD != null)
+				try {
+					connectionBD.close();
+				} catch (Exception e) {
+					System.out.println(e.toString());
+				}
+		}
+
+	}
+
+	public void retirerSomme(int id, double somme)
+			throws java.rmi.RemoteException {
+		try {
+			connectionBD = ConnectionManager.getInstance("Banque");
+
+			// requeteSql = "{call tp2retirerSomme(?,?,?,?)}";
+			//
+			// callableStatement = connectionBD.prepareCall(requeteSql);
+
+			// callableStatement.setInt(1, id);
+			// callableStatement.setDouble(2, somme);
+			// callableStatement.registerOutParameter(3,
+			// java.sql.Types.INTEGER);
+			// callableStatement.registerOutParameter(4,
+			// java.sql.Types.VARCHAR);
+			//
+			// callableStatement.executeUpdate();
+
+			// int resultUpdate = callableStatement.getInt(3);
+			// String errMessage = callableStatement.getNString(4);
+
+			// if (resultUpdate != 0) {
+			// System.out.println(errMessage);
+			// }
+
+			// else {
+			// System.out.println("Requête effectué avec succès!");
+			// }
+
+			// } catch (SQLException e) {
+			// System.out.println("Erreur de connexion avec la bd Oracle:");
+			// System.out.println(e.toString());
+
+		}
+
+		finally {
+			if (callableStatement != null)
+				try {
+					callableStatement.close();
+				} catch (Exception e) {
+					System.out.println(e.toString());
+				}
+			if (connectionBD != null)
+				try {
+					connectionBD.close();
+				} catch (Exception e) {
+					System.out.println(e.toString());
+				}
 		}
 
 	}
