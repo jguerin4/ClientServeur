@@ -21,6 +21,7 @@ public class BanqueImpl extends java.rmi.server.UnicastRemoteObject implements
 	private static CallableStatement callableStatement;
 	private static String requeteSql;
 	public static Connection connectionBD = null;
+	private Compte compteAAfficher = new Compte();
 
 	public BanqueImpl() throws java.rmi.RemoteException {
 		// ne pas oublier d'appeler le constructeur de la classe anc�tre
@@ -105,7 +106,7 @@ public class BanqueImpl extends java.rmi.server.UnicastRemoteObject implements
 		}
 	}
 
-	public void afficherCompte(int id) throws java.rmi.RemoteException {
+	public Compte afficherCompte(int id) throws java.rmi.RemoteException {
 		try {
 			connectionBD = ConnectionManager.getInstance("Banque");
 			
@@ -140,6 +141,8 @@ public class BanqueImpl extends java.rmi.server.UnicastRemoteObject implements
 			// System.out.println("Erreur de connexion avec la bd Oracle:");
 			// System.out.println(e.toString());
 			//
+			
+			return compteAAfficher;
 		}
 
 		finally {
@@ -156,7 +159,7 @@ public class BanqueImpl extends java.rmi.server.UnicastRemoteObject implements
 					System.out.println(e.toString());
 				}
 		}
-
+		
 	}
 
 	public void ajoutSomme(int id, double somme)
