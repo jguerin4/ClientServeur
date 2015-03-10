@@ -60,7 +60,7 @@ public class BanqueImpl extends java.rmi.server.UnicastRemoteObject implements
 		try {
 			connectionBD = ConnectionManager.getInstance("Banque");
 
-			requeteSql = "{call tp2creerCompte(?,?,?,?,?,?)}";
+			requeteSql = "{call tp2creerCompte(?,?,?,?)}";
 
 			callableStatement = connectionBD.prepareCall(requeteSql);
 
@@ -68,21 +68,8 @@ public class BanqueImpl extends java.rmi.server.UnicastRemoteObject implements
 			callableStatement.setString(2, nom);
 			callableStatement.setString(3, prenom);
 			callableStatement.setDouble(4, soldeDepart);
-			callableStatement.registerOutParameter(5, java.sql.Types.INTEGER);
-			callableStatement.registerOutParameter(6, java.sql.Types.VARCHAR);
 
 			callableStatement.executeUpdate();
-
-			int resultUpdate = callableStatement.getInt(5);
-			String errMessage = callableStatement.getNString(6);
-
-			if (resultUpdate != 0) {
-				System.out.println(errMessage);
-			}
-
-			else {
-				System.out.println("Requête effectué avec succès!");
-			}
 
 		} catch (SQLException e) {
 			System.out.println("Erreur de connexion avec la bd Oracle:");
