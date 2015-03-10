@@ -201,35 +201,26 @@ public class BanqueImpl extends java.rmi.server.UnicastRemoteObject implements
 			throws java.rmi.RemoteException {
 		try {
 			connectionBD = ConnectionManager.getInstance("Banque");
+			connectionBD.setAutoCommit(false);
+			requeteSql = "{call tp2ajouterSomme(?,?)}";
+			callableStatement = connectionBD.prepareCall(requeteSql);
+			somme *= -1;
+			callableStatement.setInt(1, id);
+			callableStatement.setDouble(2, somme);
+			callableStatement.executeUpdate();
+			connectionBD.commit();
+			System.out.println("toute est beau");
 
-			// requeteSql = "{call tp2retirerSomme(?,?,?,?)}";
-			//
-			// callableStatement = connectionBD.prepareCall(requeteSql);
-
-			// callableStatement.setInt(1, id);
-			// callableStatement.setDouble(2, somme);
-			// callableStatement.registerOutParameter(3,
-			// java.sql.Types.INTEGER);
-			// callableStatement.registerOutParameter(4,
-			// java.sql.Types.VARCHAR);
-			//
-			// callableStatement.executeUpdate();
-
-			// int resultUpdate = callableStatement.getInt(3);
-			// String errMessage = callableStatement.getNString(4);
-
-			// if (resultUpdate != 0) {
-			// System.out.println(errMessage);
-			// }
-
-			// else {
-			// System.out.println("Requête effectué avec succès!");
-			// }
-
-			// } catch (SQLException e) {
-			// System.out.println("Erreur de connexion avec la bd Oracle:");
-			// System.out.println(e.toString());
-
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+			if (connectionBD != null) {
+				try {
+					System.err.print("La transaction est annulée");
+					connectionBD.rollback();
+				} catch (SQLException excep) {
+					System.out.println(excep.toString());
+				}
+			}
 		}
 
 		finally {
@@ -246,6 +237,5 @@ public class BanqueImpl extends java.rmi.server.UnicastRemoteObject implements
 					System.out.println(e.toString());
 				}
 		}
-
 	}
 }
