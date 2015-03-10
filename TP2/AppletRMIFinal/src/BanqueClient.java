@@ -10,6 +10,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.List;
 
 import javax.swing.JApplet;
 import javax.swing.JButton;
@@ -66,7 +67,7 @@ public class BanqueClient extends JApplet implements ActionListener {
 		
 		try {
 			// Création des assets de l'applet
-			setLayout(new FlowLayout(5,10,5));
+			setLayout(new FlowLayout(5,10,10));
 			getContentPane().setBackground( Color.orange );
 			
 			// Initialisation Créer compte
@@ -177,7 +178,7 @@ public class BanqueClient extends JApplet implements ActionListener {
 			
 			
 			// Rétroaction sur l'état de l'applet
-			etatApplet = new JTextArea("Applet démarré!", 10,50);
+			etatApplet = new JTextArea("Applet démarré!", 15,50);
 			etatApplet.setEditable(false);
 			etatApplet.setBackground(Color.LIGHT_GRAY);
 			add(etatApplet);
@@ -243,7 +244,17 @@ public class BanqueClient extends JApplet implements ActionListener {
 					+ "ID: " + detailDuCompte.getId() + "\n"
 					+ "Nom: " + detailDuCompte.getNom() + "\n"
 					+ "Prenom: " + detailDuCompte.getPrenom() + "\n"
-					+ "Solde: " + detailDuCompte.getSolde() + "\n");
+					+ "Solde: " + detailDuCompte.getSolde() + "\n"
+					+ "-----------------------  Transactions  ------------------------------- \n"
+					);
+				List<Transaction> afficherListe = detailDuCompte.getListeTransaction();
+				for(int i=0; i < afficherListe.size(); i++)
+				{
+					Transaction afficherTransaction = afficherListe.get(i);
+					etatApplet.append("Montant de la transaction #" + i+1 + ": " + afficherTransaction.getMontant()
+							+ " avec un solde final de " + afficherTransaction.getSolde()
+							+ " effectué le " + afficherTransaction.getDate());		
+				}
 
 			} catch (Exception e) {
 				e.printStackTrace();
