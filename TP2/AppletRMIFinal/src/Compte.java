@@ -1,4 +1,4 @@
-import java.util.List;
+import java.util.ArrayList;
 
 
 public class Compte implements java.io.Serializable {
@@ -10,7 +10,7 @@ public class Compte implements java.io.Serializable {
 	private String nom;
 	private String prenom;
 	private double solde;
-	private List<Transaction> listeTransaction;
+	private ArrayList<Transaction> listeTransaction = new ArrayList<Transaction>();;
 	
 	public int getId() {
 		return id;
@@ -36,10 +36,10 @@ public class Compte implements java.io.Serializable {
 	public void setSolde(double solde) {
 		this.solde = solde;
 	}
-	public List<Transaction> getListeTransaction() {
+	public ArrayList<Transaction> getListeTransaction() {
 		return listeTransaction;
 	}
-	public void setListeTransaction(List<Transaction> listeTransaction) {
+	public void setListeTransaction(ArrayList<Transaction> listeTransaction) {
 		this.listeTransaction = listeTransaction;
 	}
 	public void ajoutTransaction(Transaction nouvelleTransaction){

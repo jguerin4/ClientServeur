@@ -103,7 +103,7 @@ public class BanqueImpl extends java.rmi.server.UnicastRemoteObject implements
 
 			Statement stmt = null;
 			ResultSet rs = null;
-			
+			compteAAfficher.getListeTransaction().clear();
 			Transaction transaction = null;
 			
 			String sql = "SELECT NOCOMPTE, NOM, PRENOM, SOLDE FROM TP2COMPTE WHERE NOCOMPTE=" + id;
@@ -125,7 +125,7 @@ public class BanqueImpl extends java.rmi.server.UnicastRemoteObject implements
 			
 			sql = "SELECT MONTANT, SOLDE, TO_CHAR(DATETRANSACTION, 'YYYY-MM-DD HH24:MI:SS') AS DATETRANSACTION FROM TP2TRANSACTION WHERE NOCOMPTE =" + id;
 			sql += " ORDER BY IDTRANSACTION";
-			
+			//System.out.println(sql);
 			rs = stmt.executeQuery(sql);
 			
 			while (rs.next()) {

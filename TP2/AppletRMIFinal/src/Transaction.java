@@ -1,4 +1,8 @@
-public class Transaction {
+public class Transaction  implements java.io.Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private double montant;
 	private double solde;
 	private String date;
