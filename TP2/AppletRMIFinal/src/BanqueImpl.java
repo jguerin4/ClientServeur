@@ -126,8 +126,15 @@ public class BanqueImpl extends java.rmi.server.UnicastRemoteObject implements
 			//
 			// callableStatement.executeUpdate();
 			//
+			//compteAAfficher.setId(id);
+			//compteAAfficher.setNom(callableStatement.getNString(2));
+			//compteAAfficher.setPrenom(callableStatement.getNString(3));
+			//compteAAfficher.setSolde(callableStatement.getNString(4));
+			//
+			//
 			// int resultUpdate = callableStatement.getInt(5);
 			// String errMessage = callableStatement.getNString(6);
+			// 
 			//
 			// if (resultUpdate != 0) {
 			// System.out.println(errMessage);

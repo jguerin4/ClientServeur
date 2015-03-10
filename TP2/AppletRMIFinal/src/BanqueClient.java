@@ -249,9 +249,57 @@ public class BanqueClient extends JApplet implements ActionListener {
 			
 		}
 		else if(evt.getSource() == ajouterSomme){
+			try {
+				// établissement de la connexion RMI
+				int port = 8989;
+				Registry registry = LocateRegistry.getRegistry(getCodeBase()
+						.getHost(), port);
+				System.out.println("Ajouter une somme ....");
+				Banque remoteReference = (Banque) registry
+						.lookup("rmi://localhost:8989/AppletRMIBanque");
+
+				int idAjoutSomme;
+				double ajouterNouvelleSomme;
+
+				idAjoutSomme = Integer.parseInt(idField.getText());
+				ajouterNouvelleSomme = Double.parseDouble(soldeField.getText());
+
+				remoteReference.ajoutSomme(idAjoutSomme, ajouterNouvelleSomme);
+
+				etatApplet.setText("Compte créer avec succès avec les valeurs suivantes: " + "\n"
+									+ "ID: " + idAjoutSomme + "\n"
+									+ "Solde: " + ajouterNouvelleSomme + "\n");
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			
 		}
 		else if(evt.getSource() == retirerSomme){
+			try {
+				// établissement de la connexion RMI
+				int port = 8989;
+				Registry registry = LocateRegistry.getRegistry(getCodeBase()
+						.getHost(), port);
+				System.out.println("Retirer une somme ....");
+				Banque remoteReference = (Banque) registry
+						.lookup("rmi://localhost:8989/AppletRMIBanque");
+
+				int idRetirerSomme;
+				double retirerNouvelleSomme;
+
+				idRetirerSomme = Integer.parseInt(idField.getText());
+				retirerNouvelleSomme = Double.parseDouble(soldeField.getText());
+
+				remoteReference.retirerSomme(idRetirerSomme, retirerNouvelleSomme);
+
+				etatApplet.setText("Compte créer avec succès avec les valeurs suivantes: " + "\n"
+									+ "ID: " + idRetirerSomme + "\n"
+									+ "Solde: " + retirerNouvelleSomme + "\n");
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			
 		}
 		
