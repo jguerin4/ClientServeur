@@ -1,21 +1,8 @@
 public class Transaction {
-	private int idTransaction;
-	private int noCompte;
 	private double montant;
 	private double solde;
 	private String date;
-	public int getIdTransaction() {
-		return idTransaction;
-	}
-	public void setIdTransaction(int idTransaction) {
-		this.idTransaction = idTransaction;
-	}
-	public int getNoCompte() {
-		return noCompte;
-	}
-	public void setNoCompte(int noCompte) {
-		this.noCompte = noCompte;
-	}
+	
 	public double getMontant() {
 		return montant;
 	}
