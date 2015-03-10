@@ -108,21 +108,25 @@ public class BanqueImpl extends java.rmi.server.UnicastRemoteObject implements
 	public void afficherCompte(int id) throws java.rmi.RemoteException {
 		try {
 			connectionBD = ConnectionManager.getInstance("Banque");
+			
 
-			// requeteSql = "{call tp2afficherCompte(?,?,?)}";
+			// requeteSql = "{call tp2afficherCompte(?,?,?,?,?,?)}";
 			//
 			// callableStatement = connectionBD.prepareCall(requeteSql);
 			//
 			// callableStatement.setInt(1, id);
-			// callableStatement.registerOutParameter(2,
+			// callableStatement.callableStatement.registerOutParameter(2,java.sql.Types.VARCHAR);
+			// callableStatement.callableStatement.registerOutParameter(3,java.sql.Types.VARCHAR);
+			// callableStatement.callableStatement.registerOutParameter(4,java.sql.Types.DOUBLE);
+			// callableStatement.registerOutParameter(5,
 			// java.sql.Types.INTEGER);
-			// callableStatement.registerOutParameter(3,
+			// callableStatement.registerOutParameter(6,
 			// java.sql.Types.VARCHAR);
 			//
 			// callableStatement.executeUpdate();
 			//
-			// int resultUpdate = callableStatement.getInt(2);
-			// String errMessage = callableStatement.getNString(3);
+			// int resultUpdate = callableStatement.getInt(5);
+			// String errMessage = callableStatement.getNString(6);
 			//
 			// if (resultUpdate != 0) {
 			// System.out.println(errMessage);

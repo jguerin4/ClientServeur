@@ -202,5 +202,37 @@ public class BanqueClient extends JApplet implements ActionListener {
 				e.printStackTrace();
 			}
 		}
+		
+		else if(evt.getSource() == detailCompteButton){
+			try {
+				// établissement de la connexion RMI
+				int port = 8989;
+				Registry registry = LocateRegistry.getRegistry(getCodeBase()
+						.getHost(), port);
+				System.out.println("Obtention des détails du compte ....");
+				Banque remoteReference = (Banque) registry
+						.lookup("rmi://localhost:8989/AppletRMIBanque");
+
+				int detailId;
+				
+
+				detailId = Integer.parseInt(idField.getText());
+
+				remoteReference.afficherCompte(detailId);
+
+				etatApplet.setText("Voici les détails du compte: " + "\n");
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		else if(evt.getSource() == ajouterSomme){
+			
+		}
+		else if(evt.getSource() == retirerSomme){
+			
+		}
+		
 	}
 }
