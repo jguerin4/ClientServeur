@@ -5,7 +5,10 @@ import java.rmi.registry.Registry;
 import java.io.File;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+
 import BaseDeDonnee.ConnectionManager;
 
 public class BanqueImpl extends java.rmi.server.UnicastRemoteObject implements
@@ -97,45 +100,31 @@ public class BanqueImpl extends java.rmi.server.UnicastRemoteObject implements
 		try {
 			connectionBD = ConnectionManager.getInstance("Banque");
 
-			// requeteSql = "{call tp2afficherCompte(?,?,?,?,?,?)}";
-			//
-			// callableStatement = connectionBD.prepareCall(requeteSql);
-			//
-			// callableStatement.setInt(1, id);
-			// callableStatement.callableStatement.registerOutParameter(2,java.sql.Types.VARCHAR);
-			// callableStatement.callableStatement.registerOutParameter(3,java.sql.Types.VARCHAR);
-			// callableStatement.callableStatement.registerOutParameter(4,java.sql.Types.DOUBLE);
-			// callableStatement.registerOutParameter(5,
-			// java.sql.Types.INTEGER);
-			// callableStatement.registerOutParameter(6,
-			// java.sql.Types.VARCHAR);
-			//
-			// callableStatement.executeUpdate();
-			//
-			// compteAAfficher.setId(id);
-			// compteAAfficher.setNom(callableStatement.getNString(2));
-			// compteAAfficher.setPrenom(callableStatement.getNString(3));
-			// compteAAfficher.setSolde(callableStatement.getNString(4));
-			//
-			//
-			// int resultUpdate = callableStatement.getInt(5);
-			// String errMessage = callableStatement.getNString(6);
-			//
-			//
-			// if (resultUpdate != 0) {
-			// System.out.println(errMessage);
-			// }
-			//
-			// else {
-			// System.out.println("Requête effectué avec succès!");
-			// }
-			//
-			// } catch (SQLException e) {
-			// System.out.println("Erreur de connexion avec la bd Oracle:");
-			// System.out.println(e.toString());
-			//
+			Statement stmt = null;
+			ResultSet rs = null;
 
-			return compteAAfficher;
+			
+			String sql = "SELECT NOCOMPTE, NOM, PRENOM, SOLDE FROM TP2COMPTE WHERE NOCOMPTE=" + id;
+
+			stmt = connectionBD.createStatement();
+			rs = stmt.executeQuery(sql);
+
+			if (rs.next()) {
+				compteAAfficher.setId(rs.getInt("NOCOMPTE"));
+				compteAAfficher.setNom(rs.getString("NOM"));
+				compteAAfficher.setPrenom(rs.getString("PRENOM"));
+				compteAAfficher.setSolde(rs.getDouble("SOLDE"));
+
+			} else {
+				System.out.println("Pas de compte 10");
+			}
+
+			rs.close();
+
+		} catch (SQLException e) {
+			System.out.println("Erreur de connexion avec la bd Oracle:");
+			System.out.println(e.toString());
+
 		}
 
 		finally {
@@ -151,11 +140,13 @@ public class BanqueImpl extends java.rmi.server.UnicastRemoteObject implements
 				} catch (Exception e) {
 					System.out.println(e.toString());
 				}
+
 		}
+		return compteAAfficher;
 
 	}
 
-	public void ajoutSomme(int id, double somme)
+	public Boolean ajoutSomme(int id, double somme)
 			throws java.rmi.RemoteException {
 		try {
 			connectionBD = ConnectionManager.getInstance("Banque");
@@ -166,7 +157,6 @@ public class BanqueImpl extends java.rmi.server.UnicastRemoteObject implements
 			callableStatement.setDouble(2, somme);
 			callableStatement.executeUpdate();
 			connectionBD.commit();
-			System.out.println("toute est beau");
 
 		} catch (SQLException e) {
 			System.out.println(e.toString());
@@ -174,8 +164,10 @@ public class BanqueImpl extends java.rmi.server.UnicastRemoteObject implements
 				try {
 					System.err.print("La transaction est annulée");
 					connectionBD.rollback();
+					return false;
 				} catch (SQLException excep) {
 					System.out.println(excep.toString());
+					return false;
 				}
 			}
 		}
@@ -194,10 +186,11 @@ public class BanqueImpl extends java.rmi.server.UnicastRemoteObject implements
 					System.out.println(e.toString());
 				}
 		}
+		return true;
 
 	}
 
-	public void retirerSomme(int id, double somme)
+	public Boolean retirerSomme(int id, double somme)
 			throws java.rmi.RemoteException {
 		try {
 			connectionBD = ConnectionManager.getInstance("Banque");
@@ -209,7 +202,6 @@ public class BanqueImpl extends java.rmi.server.UnicastRemoteObject implements
 			callableStatement.setDouble(2, somme);
 			callableStatement.executeUpdate();
 			connectionBD.commit();
-			System.out.println("toute est beau");
 
 		} catch (SQLException e) {
 			System.out.println(e.toString());
@@ -217,8 +209,10 @@ public class BanqueImpl extends java.rmi.server.UnicastRemoteObject implements
 				try {
 					System.err.print("La transaction est annulée");
 					connectionBD.rollback();
+					return false;
 				} catch (SQLException excep) {
 					System.out.println(excep.toString());
+					return false;
 				}
 			}
 		}
@@ -237,5 +231,6 @@ public class BanqueImpl extends java.rmi.server.UnicastRemoteObject implements
 					System.out.println(e.toString());
 				}
 		}
+		return true;
 	}
 }

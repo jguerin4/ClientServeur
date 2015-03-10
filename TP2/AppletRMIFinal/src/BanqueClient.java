@@ -231,19 +231,17 @@ public class BanqueClient extends JApplet implements ActionListener {
 						.lookup("rmi://localhost:8989/AppletRMIBanque");
 
 				int detailId;
-				String nomDetail = "";
-				String prenomDetail = "";
-				double soldeDetail = 0;
 
-				detailId = Integer.parseInt(idField.getText());
+				detailId = Integer.parseInt(idDetailCompte.getText());
 
-				remoteReference.afficherCompte(detailId);
+				Compte detailDuCompte = new Compte();
+				detailDuCompte = remoteReference.afficherCompte(detailId);
 
 				etatApplet.setText("Voici les détails du compte: " + "\n"
-					+ "ID: " + detailId + "\n"
-					+ "Nom: " + nomDetail + "\n"
-					+ "Prenom: " + prenomDetail + "\n"
-					+ "Solde: " + soldeDetail + "\n");
+					+ "ID: " + detailDuCompte.getId() + "\n"
+					+ "Nom: " + detailDuCompte.getNom() + "\n"
+					+ "Prenom: " + detailDuCompte.getPrenom() + "\n"
+					+ "Solde: " + detailDuCompte.getSolde() + "\n");
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -266,11 +264,18 @@ public class BanqueClient extends JApplet implements ActionListener {
 				idAjoutSomme = Integer.parseInt(idAjouterSommeCompte.getText());
 				ajouterNouvelleSomme = Double.parseDouble(montantAjout.getText());
 
-				remoteReference.ajoutSomme(idAjoutSomme, ajouterNouvelleSomme);
+				if(remoteReference.ajoutSomme(idAjoutSomme, ajouterNouvelleSomme))
+				{
 
-				etatApplet.setText("Solde ajouté avec succès: " + "\n"
-									+ "ID: " + idAjoutSomme + "\n"
-									+ "Solde ajouté: " + ajouterNouvelleSomme + "\n");
+					etatApplet.setText("Solde ajouté avec succès: " + "\n"
+										+ "ID: " + idAjoutSomme + "\n"
+										+ "Solde ajouté: " + ajouterNouvelleSomme + "\n");					
+				}
+				else
+				{
+					etatApplet.setText("La transaction à été annulé, un problème est survenu.");	
+				}
+
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -293,11 +298,18 @@ public class BanqueClient extends JApplet implements ActionListener {
 				idRetirerSomme = Integer.parseInt(idRetirerSommeCompte.getText());
 				retirerNouvelleSomme = Double.parseDouble(montantRetrait.getText());
 
-				remoteReference.retirerSomme(idRetirerSomme, retirerNouvelleSomme);
+				if(remoteReference.retirerSomme(idRetirerSomme, retirerNouvelleSomme))
+				{
 
-				etatApplet.setText("Compte créer avec succès avec les valeurs suivantes: " + "\n"
-									+ "ID: " + idRetirerSomme + "\n"
-									+ "Solde: " + retirerNouvelleSomme + "\n");
+					etatApplet.setText("Solde retiré avec succès: " + "\n"
+										+ "ID: " + idRetirerSomme + "\n"
+										+ "Solde retiré: " + retirerNouvelleSomme + "\n");
+				}
+				else
+				{
+					etatApplet.setText("La transaction à été annulé, un problème est survenu.");	
+				}
+
 
 			} catch (Exception e) {
 				e.printStackTrace();
