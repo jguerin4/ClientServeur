@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import BaseDeDonnee.ConnectionManager;
 
@@ -102,7 +103,8 @@ public class BanqueImpl extends java.rmi.server.UnicastRemoteObject implements
 
 			Statement stmt = null;
 			ResultSet rs = null;
-
+			
+			Transaction transaction = null;
 			
 			String sql = "SELECT NOCOMPTE, NOM, PRENOM, SOLDE FROM TP2COMPTE WHERE NOCOMPTE=" + id;
 
@@ -116,11 +118,27 @@ public class BanqueImpl extends java.rmi.server.UnicastRemoteObject implements
 				compteAAfficher.setSolde(rs.getDouble("SOLDE"));
 
 			} else {
-				System.out.println("Pas de compte 10");
+				System.out.println("Pas de compte : " + id);
 			}
 
 			rs.close();
+			
+			sql = "SELECT MONTANT, SOLDE, TO_CHAR(DATETRANSACTION, 'YYYY-MM-DD HH24:MI:SS') AS DATETRANSACTION FROM TP2TRANSACTION WHERE NOCOMPTE =" + id;
+			sql += " ORDER BY IDTRANSACTION";
+			
+			rs = stmt.executeQuery(sql);
+			
+			while (rs.next()) {
+				transaction = new Transaction();
+				transaction.setMontant(rs.getDouble("MONTANT"));
+				transaction.setSolde(rs.getDouble("SOLDE"));
+				transaction.setDate(rs.getString("DATETRANSACTION"));
+				compteAAfficher.ajoutTransaction(transaction);
+			}
 
+			rs.close();
+			
+			
 		} catch (SQLException e) {
 			System.out.println("Erreur de connexion avec la bd Oracle:");
 			System.out.println(e.toString());
