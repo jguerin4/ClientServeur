@@ -1,12 +1,9 @@
-import java.sql.Date;
-
-
 public class Transaction {
 	private int idTransaction;
 	private int noCompte;
 	private double montant;
 	private double solde;
-	private Date date;
+	private String date;
 	public int getIdTransaction() {
 		return idTransaction;
 	}
@@ -31,10 +28,10 @@ public class Transaction {
 	public void setSolde(double solde) {
 		this.solde = solde;
 	}
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 

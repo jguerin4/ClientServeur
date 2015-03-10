@@ -1,3 +1,5 @@
+import java.util.List;
+
 
 public class Compte implements java.io.Serializable {
 	/**
@@ -8,6 +10,8 @@ public class Compte implements java.io.Serializable {
 	private String nom;
 	private String prenom;
 	private double solde;
+	private List<Transaction> listeTransaction;
+	
 	public int getId() {
 		return id;
 	}
@@ -31,6 +35,15 @@ public class Compte implements java.io.Serializable {
 	}
 	public void setSolde(double solde) {
 		this.solde = solde;
+	}
+	public List<Transaction> getListeTransaction() {
+		return listeTransaction;
+	}
+	public void setListeTransaction(List<Transaction> listeTransaction) {
+		this.listeTransaction = listeTransaction;
+	}
+	public void ajoutTransaction(Transaction nouvelleTransaction){
+		this.listeTransaction.add(nouvelleTransaction);
 	}
 	
 }

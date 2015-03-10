@@ -56,6 +56,8 @@ public class BanqueClient extends JApplet implements ActionListener {
 	
 	TextField montantRetraitTitle;
 	TextField montantRetrait;
+	
+	
 
 	JTextArea etatApplet;
 
@@ -175,7 +177,7 @@ public class BanqueClient extends JApplet implements ActionListener {
 			
 			
 			// Rétroaction sur l'état de l'applet
-			etatApplet = new JTextArea("Applet démarré!", 5,50);
+			etatApplet = new JTextArea("Applet démarré!", 10,50);
 			etatApplet.setEditable(false);
 			etatApplet.setBackground(Color.LIGHT_GRAY);
 			add(etatApplet);
