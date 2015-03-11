@@ -400,15 +400,12 @@ public class BanqueClient extends JApplet implements ActionListener {
 		return !sc.hasNext();
 	}
 
-	public static boolean isDouble(String s) { // Code basé sur ce lien
-												// http://www.tutorialspoint.com/java/util/scanner_hasnextint.htm
-		@SuppressWarnings("resource")
-		Scanner sc = new Scanner(s.trim());
-		if (!sc.hasNextDouble())
-			return false;
-		// we know it starts with a valid double, now make sure
-		// there's nothing left!
-		sc.nextDouble();
-		return !sc.hasNext();
-	}
+	public static boolean isDouble(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 }
