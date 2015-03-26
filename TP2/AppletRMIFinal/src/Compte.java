@@ -10,7 +10,8 @@ public class Compte implements java.io.Serializable {
 	private String nom;
 	private String prenom;
 	private double solde;
-	private ArrayList<Transaction> listeTransaction = new ArrayList<Transaction>();;
+	private ArrayList<Transaction> listeTransaction = new ArrayList<Transaction>();
+	private String errMessage;
 	
 	public int getId() {
 		return id;
@@ -44,6 +45,12 @@ public class Compte implements java.io.Serializable {
 	}
 	public void ajoutTransaction(Transaction nouvelleTransaction){
 		this.listeTransaction.add(nouvelleTransaction);
+	}
+	public String getErrMessage() {
+		return errMessage;
+	}
+	public void setErrMessage(String errMessage) {
+		this.errMessage = errMessage;
 	}
 	
 }

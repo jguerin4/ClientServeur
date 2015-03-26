@@ -105,8 +105,9 @@ public class BanqueImpl extends java.rmi.server.UnicastRemoteObject implements
 			ResultSet rs = null;
 			compteAAfficher.getListeTransaction().clear();
 			Transaction transaction = null;
-			
-			String sql = "SELECT NOCOMPTE, NOM, PRENOM, SOLDE FROM TP2COMPTE WHERE NOCOMPTE=" + id;
+
+			String sql = "SELECT NOCOMPTE, NOM, PRENOM, SOLDE FROM TP2COMPTE WHERE NOCOMPTE="
+					+ id;
 
 			stmt = connectionBD.createStatement();
 			rs = stmt.executeQuery(sql);
@@ -122,12 +123,13 @@ public class BanqueImpl extends java.rmi.server.UnicastRemoteObject implements
 			}
 
 			rs.close();
-			
-			sql = "SELECT MONTANT, SOLDE, TO_CHAR(DATETRANSACTION, 'YYYY-MM-DD HH24:MI:SS') AS DATETRANSACTION FROM TP2TRANSACTION WHERE NOCOMPTE =" + id;
+
+			sql = "SELECT MONTANT, SOLDE, TO_CHAR(DATETRANSACTION, 'YYYY-MM-DD HH24:MI:SS') AS DATETRANSACTION FROM TP2TRANSACTION WHERE NOCOMPTE ="
+					+ id;
 			sql += " ORDER BY IDTRANSACTION";
-			//System.out.println(sql);
+			// System.out.println(sql);
 			rs = stmt.executeQuery(sql);
-			
+
 			while (rs.next()) {
 				transaction = new Transaction();
 				transaction.setMontant(rs.getDouble("MONTANT"));
@@ -137,8 +139,7 @@ public class BanqueImpl extends java.rmi.server.UnicastRemoteObject implements
 			}
 
 			rs.close();
-			
-			
+
 		} catch (SQLException e) {
 			System.out.println("Erreur de connexion avec la bd Oracle:");
 			System.out.println(e.toString());
