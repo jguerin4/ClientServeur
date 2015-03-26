@@ -45,7 +45,7 @@
 	 <li><a href="voyages.jsp">Gestion des Voyages</a></li>
 	</ul>  
 	
-<h1> Salut, bienvenue dans la page d'acceuil!</h1>
+<h1> Salut, bienvenue dans la page inscription!</h1>
 </body>
 
 </html> 
