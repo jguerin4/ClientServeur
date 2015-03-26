@@ -10,6 +10,7 @@
   <style>
   body {background-color:#d9ef8b}
   h1   {color:#006837}
+  h1#welcome {color:#d73027}
   p    {color:#f46d43}
   ul#menu {
    		padding: 0;
@@ -21,7 +22,7 @@
 	
 		
 	ul#menu li a {
-	    background-color: black;
+	    background-color: #a50026;
 	    color: white;
 	    padding: 10px 20px;
 	    text-decoration: none;
@@ -35,17 +36,22 @@
 </head>
 
 <body>
-	<ul id="menu">
-	 <li><a href="index.jsp">Accueil</a></li>
-	 <li><a href="inscription.jsp">Inscription</a></li>
-	 <li><a href="connexion.jsp">Connexion</a></li>
-	 <li><a href="itineraire.jsp">Itinéraires de voyage</a></li>
-	 <li><a href="preferences.jsp">Préférences</a></li>
-	 <li><a href="recherche.jsp">Recherche</a></li>
-	 <li><a href="voyages.jsp">Gestion des Voyages</a></li>
+	<ul id="menu" style="text-align:center">
+	 <li><a href="/TP3/index.jsp">Accueil</a></li>
+	 <li><a href="/TP3/inscription.jsp">Inscription</a></li>
+	 <li><a href="/TP3/connexion.jsp">Connexion</a></li>
+	 <li><a href="/TP3/itineraire.jsp">Itinéraires de voyage</a></li>
+	 <li><a href="/TP3/preferences.jsp">Préférences</a></li>
+	 <li><a href="/TP3/recherche.jsp">Recherche</a></li>
+	 <li><a href="/TP3/voyages.jsp">Gestion des Voyages</a></li>
 	</ul>  
 	
-<h1> Salut, bienvenue dans la page d'acceuil!</h1>
+	
+	<br>
+	<h1 id="welcome" style="text-align:center">  Bonjour, bienvenue dans la page d'acceuil!</h1>
+	<br>
+	<h4 style="text-align:center"> Veuillez utiliser les onglets dans le menu afin de naviguer à travers le site web.</h4>
+	<br>
 </body>
 
 </html> 
