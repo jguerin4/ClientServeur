@@ -48,7 +48,7 @@
 	
 	
 	<br>
-	<h1 id="welcome" style="text-align:center">  Bonjour, bienvenue dans la page d'acceuil!</h1>
+	<h1 id="welcome" style="text-align:center"> Bienvenue dans la page d'acceuil!</h1>
 	<br>
 	<h4 style="text-align:center"> Veuillez utiliser les onglets dans le menu afin de naviguer à travers le site web.</h4>
 	<br>

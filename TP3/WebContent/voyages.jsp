@@ -45,7 +45,8 @@
 	 <li><a href="/TP3/voyages.jsp">Gestion des Voyages</a></li>
 	</ul> 
 	
-<h1><strong> Bonjour, bienvenue dans la page voyage!</strong></h1>
+	<br>
+	<h1> Bienvenue dans la page voyage!</h1>
 
 </body>
 

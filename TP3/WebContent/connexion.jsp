@@ -45,7 +45,20 @@
 	 <li><a href="/TP3/voyages.jsp">Gestion des Voyages</a></li>
 	</ul>
 	
-	<h1> Salut, bienvenue dans la page connexion!</h1>
+	<h1> Bienvenue dans la page connexion!</h1>
+	<h4> Veuillez entrez les informations de votre compte pour vous connecter.</h4>
+	<form>
+		Nom d'utilisateur:<br>
+		<input type="text" name="c_user:">
+		<br>
+		
+		Mot de passe:<br>
+		<input type="password" name="c_password:">
+		<br>
+
+		<input type="submit" value="Connexion!">
+
+	</form>
 
 </body>
 

@@ -45,7 +45,9 @@
 	 <li><a href="/TP3/voyages.jsp">Gestion des Voyages</a></li>
 	</ul> 
 	
-<h1> Salut, bienvenue dans la pag recherche!</h1>
+<h1> Bienvenue dans la pag recherche!</h1>
+<h4> Veuillez entrer les paramètres de votre recherche. Les coordonnées des personnes interessés seront alors affichés.</h4>
+<!-- Départ arrivée date -->
 </body>
 
 </html> 

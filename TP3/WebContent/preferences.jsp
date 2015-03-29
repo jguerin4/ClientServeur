@@ -45,7 +45,24 @@
 	 <li><a href="/TP3/voyages.jsp">Gestion des Voyages</a></li>
 	</ul> 
 	
-<h1> Salut, bienvenue dans la page préférences!</h1>
+<h1> Bienvenue dans la page préférences!</h1>
+<h4> Vous pouvez ici modifier les préférences de votre compte</h4>
+
+<form>
+	<input type="radio" name="fumeur" value="nonfumeur" checked>Je préfère voyager dans un véhicule sans fumeur 
+	<br>
+	<input type="radio" name="fumeur" value="ouifumeur">Je n'ai pas d'objection à voyager dans un véhicule avec fumeurs 
+	<br>
+	<br>
+	<input type="radio" name="animaux" value="nonanimaux" checked>Je préfère voyager dans une voiture sans animaux 
+	<br>
+	<input type="radio" name="animaux" value="ouianimaux">Je n'ai pas d'objection à voyager avec des animaux 
+	<br><br>
+	<input type="submit" value="Modifier">
+</form>
+
+<!-- Possibilité de modifier le mot de passe au besoin! -->
+
 </body>
 
 </html> 

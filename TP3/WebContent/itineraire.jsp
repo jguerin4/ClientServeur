@@ -45,7 +45,9 @@
 	 <li><a href="/TP3/voyages.jsp">Gestion des Voyages</a></li>
 	</ul>  
 	
-<h1> Salut, bienvenue dans la page itinéraire!</h1>
+<h1> Bienvenue dans la page itinéraire!</h1>
+<h4> Voici la liste de tous les intinéraires liés à votre compte:</h4>
+
 </body>
 
 </html> 

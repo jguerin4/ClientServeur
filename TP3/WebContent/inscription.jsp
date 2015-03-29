@@ -45,7 +45,54 @@
 	 <li><a href="/TP3/voyages.jsp">Gestion des Voyages</a></li>
 	</ul> 
 	
-<h1> Salut, bienvenue dans la page inscription!</h1>
+	
+<h1> Bienvenue dans la page inscription!</h1>
+
+
+<form>
+Nom d'utilisateur:<br>
+<input type="text" name="user:">
+<br>
+
+Mot de passe:<br>
+<input type="password" name="password:">
+<br>
+
+Confirmez votre mot de passe:<br>
+<input type="password" name="confirmpassword">
+<br>
+<br>
+Prénom:<br>
+<input type="text" name="prenom">
+<br>
+Nom de famille:<br>
+<input type="text" name="nom">
+<br>
+Adresse courriel:<br>
+<input type="text" name="courriel">
+<br>
+Numéro de téléphone:<br>
+<input type="text" name="telephone">
+<br>
+Date de naissance:<br>
+<input type="text" name="birthday">
+<br>
+<br>
+
+<input type="radio" name="fumeur" value="nonfumeur" checked>Je préfère voyager dans un véhicule sans fumeur 
+<br>
+<input type="radio" name="fumeur" value="ouifumeur">Je n'ai pas d'objection à voyager dans un véhicule avec fumeurs 
+<br>
+<br>
+<input type="radio" name="animaux" value="nonanimaux" checked>Je préfère voyager dans une voiture sans animaux 
+<br>
+<input type="radio" name="animaux" value="ouianimaux">Je n'ai pas d'objection à voyager avec des animaux 
+<br><br>
+<input type="submit" value="S'inscrire!">
+
+</form>
+
+
 </body>
 
 </html> 
