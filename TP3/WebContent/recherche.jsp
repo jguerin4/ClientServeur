@@ -48,6 +48,23 @@
 <h1> Bienvenue dans la pag recherche!</h1>
 <h4> Veuillez entrer les paramètres de votre recherche. Les coordonnées des personnes interessés seront alors affichés.</h4>
 <!-- Départ arrivée date -->
+
+<form>
+	Ville de départ:
+	<input type="text" name="depart">
+	
+	
+	Ville de destination:
+	<input type="text" name="destination">
+	
+	
+	Date du voyage(YYYY/MM/JJ):
+	<input type="text" name="confirmpassword">
+
+	<input type="submit" value="Rechercher!">
+
+</form>
+
 </body>
 
 </html> 
