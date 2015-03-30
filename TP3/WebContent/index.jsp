@@ -34,16 +34,24 @@
 	<br>
 	<%if (obj == null) { %>
 	<h1 id="welcome" style="text-align: center">Bonjour visiteur, bienvenue dans la page
-		d'acceuil! Veuillez vous connecter dans la page connexion ou vous inscire si vous n'avez pas de compte.</h1>
+		d'acceuil! Veuillez vous connecter dans la page connexion ou vous inscrire si vous n'avez pas de compte.</h1>
 	<br>
 	<%} else { %>
 		<h1 id="welcome" style="text-align: center">Bonjour <%out.print(obj); %>, bienvenue dans la page
-		d'acceuil! Veuillez vous connecter dans la page connexion ou vous inscire si vous n'avez pas de compte.</h1>
+		d'acceuil!</h1>
 	<br>
 	<%} %>
 	<h4 style="text-align: center">Veuillez utiliser les onglets dans
 		le menu afin de naviguer à travers le site web.</h4>
 	<br>
+	
+	<%
+	if(request.getParameter("submit") != null) 
+	{
+		
+	}
+	
+	%>
 </body>
 
 </html>
