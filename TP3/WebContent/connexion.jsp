@@ -18,7 +18,6 @@
 		<%
 		HttpSession session1 = request.getSession(true);
 		Object obj = session1.getAttribute("Utilisateur");
-		session.setAttribute("calledBy","connexion");
 		//out.println("L'utilisateur est :>");
 		//out.print(obj);
 

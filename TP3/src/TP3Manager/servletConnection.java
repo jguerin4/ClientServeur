@@ -68,19 +68,26 @@ public class servletConnection extends HttpServlet {
 			String msg;
 			try
 			{
+				//  ml   pwd =1234
 				connectionBD = ConnectionManager.getInstance("connectionBD");
 				Statement stmt = null;
-				ResultSet rs = null;
 				
-				String sql = "SELECT PRENOM FROM MEDECIN";
+				String nomUtilisateurForm = "'ml9'";//"'" + nomUtilisateur.toString() + "'";
+				String passwordForm = "'1234'";//"'" + motDePasse.toString() + "'";
+				String sql = "SELECT IDCOMPTE, PSEUDO, MOTDEPASSE FROM TP3USAGER where PSEUDO =";
+				sql += nomUtilisateurForm;
+				sql += " and MOTDEPASSE =";
+				sql += passwordForm;
+				//sql += ";";
+				System.out.println(sql);	
 				stmt = connectionBD.createStatement();
-				rs = stmt.executeQuery(sql);
-				
+				ResultSet rs = stmt.executeQuery(sql);
+				String user = "";
 				if (rs.next()) {
-					System.out.println("Ta réussi ton select");
+					System.out.println("Tu as un compte et peut te connecter");
 	
 				} else {
-					System.out.println("Pas de select : ");
+					System.out.println("Tu n'as pas de compte et ne peux te connecter");
 				}
 				//if nomUtilisateur == .......
 				rs.close();
