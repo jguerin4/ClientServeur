@@ -44,7 +44,7 @@
 	<%} %>
 
 
-<form>
+<form method=POST action=servletInscription>
 	Nom d'utilisateur:<br>
 	<input type="text" name="user">
 	<br>
@@ -74,14 +74,14 @@
 	<br>
 	<br>
 	
-	<input type="radio" name="fumeur" value="nonfumeur" checked>Je préfère voyager dans un véhicule sans fumeur 
+	<input type="radio" name="fumeur" value=0 checked>Je préfère voyager dans un véhicule sans fumeur 
 	<br>
-	<input type="radio" name="fumeur" value="ouifumeur">Je n'ai pas d'objection à voyager dans un véhicule avec fumeurs 
+	<input type="radio" name="fumeur" value=1>Je n'ai pas d'objection à voyager dans un véhicule avec fumeurs 
 	<br>
 	<br>
-	<input type="radio" name="animaux" value="nonanimaux" checked>Je préfère voyager dans une voiture sans animaux 
+	<input type="radio" name="animaux" value=0 checked>Je préfère voyager dans une voiture sans animaux 
 	<br>
-	<input type="radio" name="animaux" value="ouianimaux">Je n'ai pas d'objection à voyager avec des animaux 
+	<input type="radio" name="animaux" value=1>Je n'ai pas d'objection à voyager avec des animaux 
 	<br><br>
 	<input type="submit" value="S'inscrire!">
 

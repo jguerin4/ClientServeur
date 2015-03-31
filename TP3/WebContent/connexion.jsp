@@ -43,17 +43,12 @@
 	<br>
 	<%} %>
 	
-	<form method="post" action = "servletConnection">
-		Nom d'utilisateur:<br>
-		<input type="text" name="c_user:">
-		<br>
+	<form method=POST action=servletConnection>
+		Nom d'utilisateur:<br><input type="text" name=user ><br>
 		
-		Mot de passe:<br>
-		<input type="password" name="c_password:">
-		<br>
+		Mot de passe:<br><input type="password" name=password ><br>
 
-		<input type="submit" value="Connexion!">
-
+		<input type="submit" value="Connexion!"/>
 	</form>
 
 </body>

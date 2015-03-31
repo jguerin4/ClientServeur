@@ -63,53 +63,49 @@ public class servletConnection extends HttpServlet {
 		HttpSession session1 = req.getSession(true);
 
 			System.out.println("Connexion");
-			Object nomUtilisateur = session1.getAttribute("c_user");
-			Object motDePasse = session1.getAttribute("c_password");
-			String msg;
-			try
-			{
-				//  ml   pwd =1234
-				connectionBD = ConnectionManager.getInstance("connectionBD");
-				Statement stmt = null;
+			
+				String nomUtilisateur = (String)req.getParameter("user");
+				String motDePasse = (String)req.getParameter("password");
 				
-				String nomUtilisateurForm = "'ml9'";//"'" + nomUtilisateur.toString() + "'";
-				String passwordForm = "'1234'";//"'" + motDePasse.toString() + "'";
-				String sql = "SELECT IDCOMPTE, PSEUDO, MOTDEPASSE FROM TP3USAGER where PSEUDO =";
-				sql += nomUtilisateurForm;
-				sql += " and MOTDEPASSE =";
-				sql += passwordForm;
-				//sql += ";";
-				System.out.println(sql);	
-				stmt = connectionBD.createStatement();
-				ResultSet rs = stmt.executeQuery(sql);
-				String user = "";
-				if (rs.next()) {
-					System.out.println("Tu as un compte et peut te connecter");
-	
-				} else {
-					System.out.println("Tu n'as pas de compte et ne peux te connecter");
+				String msg;
+				try
+				{
+					//  ml   pwd =1234
+					connectionBD = ConnectionManager.getInstance("connectionBD");
+					Statement stmt = null;
+					
+					String nomUtilisateurForm = "'" + nomUtilisateur + "'";
+					String passwordForm = "'" + motDePasse + "'";
+					String sql = "SELECT IDCOMPTE, PSEUDO, MOTDEPASSE FROM TP3USAGER where PSEUDO =";
+					sql += nomUtilisateurForm;
+					sql += " and MOTDEPASSE =";
+					sql += passwordForm;
+					//sql += ";";
+					System.out.println(sql);	
+					stmt = connectionBD.createStatement();
+					ResultSet rs = stmt.executeQuery(sql);
+					
+					if (rs.next()) {
+						System.out.println("Tu as un compte et peut te connecter");
+						session1.setAttribute("Utilisateur", nomUtilisateur);
+		
+					} else {
+						System.out.println("Tu n'as pas de compte et ne peux te connecter");
+					}
+					//if nomUtilisateur == .......
+					rs.close();
+					stmt.close();
+					connectionBD.close();
+					res.sendRedirect("index.jsp");  
+					
 				}
-				//if nomUtilisateur == .......
-				rs.close();
-				stmt.close();
-				connectionBD.close();
-				res.sendRedirect("index.jsp");  
-				
+				catch(Exception e)
+				{
+					e.printStackTrace();			
+				}
 			}
-			catch(Exception e)
-			{
-				e.printStackTrace();			
-			}
-			
-			
-			
-			
-		//fin switch
 
-		}
-		
-		
-		
+
 		/*String msg;
 		PrintWriter out = res.getWriter();
 		if (req.getParameter("eat") != null)

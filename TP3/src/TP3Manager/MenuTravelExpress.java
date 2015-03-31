@@ -41,6 +41,7 @@ public class MenuTravelExpress {
 		str += " <li><a href='/TP3/preferences.jsp'>Préférences</a></li>\n";
 		str += " <li><a href='/TP3/recherche.jsp'>Recherche</a></li>\n";
 		str += " <li><a href='/TP3/voyages.jsp'>Gestion des Voyages</a></li>\n";
+		str += " <li><a href='/TP3/deconnectionServlet'>Se déconnecter</a></li>\n";
 		str += " </ul> \n";
 		return str;
 	}
