@@ -45,6 +45,9 @@ public class servletReservation extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		//Servlet appelé par reservation.jsp , s'occupe d'associer une comtpte à 
+		// un itinéraire et de mettre à jour les caractéristiques de l'itinéraire. 
+		
 		try {
 			System.out.println("Test ajout connexion");
 			ConnectionManager.ajouterConnection("connectionBD");

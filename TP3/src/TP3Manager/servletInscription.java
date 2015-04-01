@@ -48,6 +48,9 @@ public class servletInscription extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		//Créer une donnée dans la table TP3USAGER à l'aide d'une procédure
+		// Juste avant la requête, on vérifie les entrées de l'usager avec 
+		// des expressions régulière.
 		try {
 			System.out.println("Test ajout connexion");
 			ConnectionManager.ajouterConnection("connectionBD");

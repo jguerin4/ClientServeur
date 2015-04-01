@@ -42,6 +42,9 @@ public class servletPreferences extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		//Permet de modifier les préférences du comtpte, puisque l'usager peut vérifier si 
+		// un voyage correspond à ses préférences.
+		
 		try {
 			System.out.println("Test ajout connexion");
 			ConnectionManager.ajouterConnection("connectionBD");

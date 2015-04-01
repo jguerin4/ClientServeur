@@ -27,7 +27,7 @@ public class ConnectionManager {
 	public static void ajouterConnection(String nom) throws ClassNotFoundException {
 
 		if (hm == null) {
-			hm = new HashMap();
+			hm = new HashMap();	//Pour former un singleton ( s'assurer qu'il n'y a pas plus d'une connexion par poste
 		}
 
 		if (!hm.containsKey(nom)) {
@@ -57,7 +57,7 @@ public class ConnectionManager {
 	}
 
 	// Méthode qui va nous retourner notre instance et la créer si elle n'existe
-	// pas
+	// pas, patron Singleton
 	public static Connection getInstance(String nom) {
 
 		Connection conn = (Connection) hm.get(nom);

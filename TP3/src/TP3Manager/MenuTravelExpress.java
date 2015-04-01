@@ -1,7 +1,7 @@
 package TP3Manager;
 
 public class MenuTravelExpress {
-	public String getStyleMenu() {
+	public String getStyleMenu() {	//Style du menu, toutes les pages utilisent cette classe pour former le menu.
 		String str = "";
 		str += "<!-- Palette couleur vert + rouge #a50026 #d73027 #f46d43 \n";
 		str += "#fdae61 #fee08b #ffffbf \n";

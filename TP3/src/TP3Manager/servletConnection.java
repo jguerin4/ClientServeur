@@ -49,7 +49,9 @@ public class servletConnection extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
+		//Requête à la base de donnée, pour identifier la correspondance Nom d'utilisateur et mot de passe.
+		// Si cette correspondance à lieu, l'usager se connecte en modifiant les atributs Utilisateur et PrenomNom 
+		//Dans la session.
 		try {
 			System.out.println("Test ajout connexion");
 			ConnectionManager.ajouterConnection("connectionBD");

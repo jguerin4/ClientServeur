@@ -16,6 +16,7 @@
 
 <body>
 	<%HttpSession session1 = request.getSession(true);
+	session1.setAttribute("Utilisateur","Marcel");
 	Object obj = session1.getAttribute("Utilisateur");
 	
 	if(obj==null){
@@ -59,40 +60,37 @@
 		<td align="center"> Arrivé</td>
 		<td align="center"> Date</td>
 		<td align="center"> Conducteur</td>
+		<td align="center"> Fumeur</td>
+		<td align="center"> Animal</td>
 	</tr>
 	<% 
 	
 
 	char cGil = (char)34;
 	
-	String sql = "SELECT i.IDITINERAIRE, u.NOM, u.PRENOM, i.DATEPUBLICATION, to_char(i.HEUREDEPART, 'yyyy-mm-dd hh24:mi') as HEUREDEPART, i.DESTINATION, i.PRIXPARPASSAGE, i.NBPASSAGER, i.DEPART" ;
+	String sql = "SELECT i.IDITINERAIRE, u.NOM, u.PRENOM, i.DATEPUBLICATION, to_char(i.HEUREDEPART, 'yyyy-mm-dd hh24:mi') as HEUREDEPART, i.DESTINATION, i.PRIXPARPASSAGE, i.NBPASSAGER, i.DEPART , u.FUMEUR, u.ANIMAL" ;
 	sql += " FROM TP3ITINERAIRE i INNER JOIN TP3USAGER u ON i.IDCONDUCTEUR = u.IDCOMPTE ";
 	
-	String where = "";
+	String where = "  WHERE i.NBPASSAGER > 0 ";
 	if(request.getParameter("depart") != null){
 		if(!request.getParameter("depart").equals("")){
-		where += " UPPER(DEPART) = UPPER('" + request.getParameter("depart") + "') ";
+			where += " AND UPPER(DEPART) = UPPER('" + request.getParameter("depart") + "') ";
 		}
 	}
 	
 	if(request.getParameter("destination") != null){
 		if(!request.getParameter("destination").equals("")){
-			if(!where.equals(""))
-				where += " AND ";
-			where += " UPPER(DESTINATION) = UPPER('" + request.getParameter("destination") + "') ";
+			where += " AND UPPER(DESTINATION) = UPPER('" + request.getParameter("destination") + "') ";
 		}
 	}
 	
 	if(request.getParameter("dateVoyage") != null){
 		if(!request.getParameter("dateVoyage").equals("")){
-			if(!where.equals(""))
-				where += " AND ";
-			where += " to_char(HEUREDEPART,'yyyy-mm-dd') = '" + request.getParameter("dateVoyage").trim() + "') ";
+			where += " AND to_char(HEUREDEPART,'yyyy-mm-dd') = '" + request.getParameter("dateVoyage").trim() + "' ";
 		}	
 	}
-	
-	if(!where.equals(""))	
-		sql += " WHERE " + where;
+
+	sql +=   where;
 	
 	//out.println(sql);
 	
@@ -107,13 +105,28 @@
 		stmt = conn.createStatement();
 
 		java.sql.ResultSet rs = stmt.executeQuery(sql);
-        
+        String msgFum = "";
+        String msgAni = "";
+		
+		
         while (rs.next()) {
+        	if(rs.getInt("FUMEUR")==1 ){
+    			msgFum = "Oui";
+    		}else{
+    			msgFum = "Non";
+    		}
+           	if(rs.getInt("ANIMAL")==1 ){
+        			msgAni = "Oui";
+        		}else{
+        			msgAni = "Non";
+        	}
         	out.println("<tr> ");
         	out.println("<td ><a href=" + cGil + "detailItineraire.jsp?idItineraire=" + rs.getString("IDITINERAIRE") + cGil + " >" + rs.getString("DEPART") + "</a></td>)");
         	out.println("<td ><a href=" + cGil + "detailItineraire.jsp?idItineraire=" + rs.getString("IDITINERAIRE") + cGil + " >" + rs.getString("DESTINATION") + "</a></td>)");
         	out.println("<td ><a href=" + cGil + "detailItineraire.jsp?idItineraire=" + rs.getString("IDITINERAIRE") + cGil + " >" + rs.getString("HEUREDEPART") + "</a></td>)");
         	out.println("<td ><a href=" + cGil + "detailItineraire.jsp?idItineraire=" + rs.getString("IDITINERAIRE") + cGil + " >" + rs.getString("PRENOM") + " " + rs.getString("NOM") + "</a></td>)");
+        	out.println("<td ><a href=" + cGil + "detailItineraire.jsp?idItineraire=" + rs.getString("IDITINERAIRE") + cGil + " >" + msgFum  + "</a></td>)");
+        	out.println("<td ><a href=" + cGil + "detailItineraire.jsp?idItineraire=" + rs.getString("IDITINERAIRE") + cGil + " >" + msgAni + "</a></td>)");
         	out.println("</tr>");
         }
         rs.close();

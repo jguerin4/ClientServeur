@@ -40,7 +40,8 @@ public class deconnectionServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session1 = request.getSession(true);
-		session1.setAttribute("Utilisateur", null);
+		session1.setAttribute("Utilisateur", null);	//Remet la session à son état initial. 
+													//Les pages utilisent ces attributs pour identifier l'utilisateur
 		session1.setAttribute("PrenomNom", null);
 		response.sendRedirect("index.jsp");
 	}

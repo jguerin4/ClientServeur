@@ -45,6 +45,8 @@ public class servletItineraire extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		//Affichage de tous les itinéraires liés au compte. Pour ce,
+		// on effectue une requête select avec la base de données.
 		try {
 			System.out.println("Test ajout connexion");
 			ConnectionManager.ajouterConnection("connectionBD");

@@ -52,11 +52,11 @@ public class AnnulerReservation extends HttpServlet {
 		
 		try {
 			String itineraireID = (String) req.getParameter("idItineraire");
-			
+			//Va chercher une connection à l'aide de Connection Manager
 			connectionBD = ConnectionManager.getInstance("connectionBD");
 			Statement stmt = null;
 			stmt = connectionBD.createStatement();
-
+			//Création de la requête sql
 			String sss = " DELETE FROM PASSAGER WHERE IDCOMPTE = " + obj + " AND IDITINERAIRE = " + itineraireID;
 			System.out.println(sss);
 			connectionBD.setAutoCommit(false);
@@ -67,7 +67,8 @@ public class AnnulerReservation extends HttpServlet {
 			sss = " UPDATE TP3USAGER SET NBANNULATION = NBANNULATION + 1 WHERE IDCOMPTE = " + obj;
 			System.out.println(sss);
 			stmt.executeQuery(sss);
-
+			
+			// Enregistre la modification dans la base de données
 			connectionBD.commit();
 
 		} catch (SQLException e) {
@@ -75,7 +76,7 @@ public class AnnulerReservation extends HttpServlet {
 			
 			if (connectionBD != null) {
 				try {
-					connectionBD.rollback();
+					connectionBD.rollback();//Gestion d'erreur, on redirige l'usager pour raison de simplicité
 					out.println("<HTML>\n<BODY>\n"
 							+ "<H1>Annulation d'un itinéraire raté, un problème est survenu avec la base de donnée! Attendez la redirection ...</H1>\n"
 							+ "</BODY></HTML>");
@@ -87,7 +88,7 @@ public class AnnulerReservation extends HttpServlet {
 			}
 		}
 
-		finally {
+		finally {	//Fermeture des éléments qui interagissent avec la base de données.
 			if (callableStatement != null)
 				try {
 					callableStatement.close();
@@ -100,7 +101,7 @@ public class AnnulerReservation extends HttpServlet {
 				} catch (Exception e) {
 					System.out.println(e.toString());
 				}
-			out.println("<HTML>\n<BODY>\n"
+			out.println("<HTML>\n<BODY>\n"	//Réussite
 					+ "<H1>Annulation d'un itinéraire reussi. Un courriel à été envoyé aux utilisateurs concernés. Attendez la redirection ...</H1>\n"
 					+ "</BODY></HTML>");
 

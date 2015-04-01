@@ -15,7 +15,7 @@
 </head>
 
 <body>
-		<%
+		<% 
 		HttpSession session1 = request.getSession(true);
 		Object obj = session1.getAttribute("PrenomNom");
 		Object idUser = session1.getAttribute("Utilisateur");
@@ -27,11 +27,13 @@
 		{
 			out.println(mm.getMenu());
 		}
-		//session1.setAttribute("Utilisateur", "Marcel");
 	%>
 
-	<br>
-	<%if (idUser == null) { %>
+	<br> 
+	<%if (idUser == null) { 
+	
+	//Creation du corps de la page connexion%>
+	
 	<h1 id="welcome" style="text-align: center">Bonjour visiteur, bienvenue dans la page
 		de connexion! Veuillez vous connecter dans la page connexion ou vous inscrire si vous n'avez pas de compte.</h1>
 	<br>

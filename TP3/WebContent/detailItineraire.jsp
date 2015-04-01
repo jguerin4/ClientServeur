@@ -69,6 +69,7 @@
 		}
 		
 		try {
+			//Connexion à la BD plus envoi requête sql
 			connectionBD = ConnectionManager.getInstance("connectionBD");
 			String sql = "SELECT u.NOM, u.PRENOM, i.DATEPUBLICATION, i.HEUREDEPART ";
 			sql += ", i.DESTINATION, i.PRIXPARPASSAGE, i.NBPASSAGER, i.DEPART, i.ACTIF ";
