@@ -16,7 +16,6 @@
 
 <body>
 	<%HttpSession session1 = request.getSession(true);
-	
 	Object obj = session1.getAttribute("Utilisateur");
 	
 	if(obj==null){
@@ -88,7 +87,7 @@
 		if(!request.getParameter("dateVoyage").equals("")){
 			if(!where.equals(""))
 				where += " AND ";
-			where += " to_char(HEUREDEPART,'yyyy-mm-dd') = '" + request.getParameter("dateVoyage").trim() + "' ";
+			where += " to_char(HEUREDEPART,'yyyy-mm-dd') = '" + request.getParameter("dateVoyage").trim() + "') ";
 		}	
 	}
 	

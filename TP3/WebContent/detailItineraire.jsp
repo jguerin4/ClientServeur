@@ -79,13 +79,11 @@
 			System.out.println(sql);
 			
 			stmt = connectionBD.createStatement();
-			System.out.println("1");
+
 			rs = stmt.executeQuery(sql);
-			System.out.println("2");
 			
 			if (rs.next())
 			{
-				System.out.println("3");
 				nomConducteur = rs.getString("NOM");
 				prenomConducteur = rs.getString("PRENOM");
 				datePublication = rs.getString("DATEPUBLICATION");
@@ -102,40 +100,29 @@
 				 <h2>Voyage #<% out.print(idItineraire); %></h2>
 				 <br>
 				 <p style="color:white;">
-				 <% /*
-				 nomConducteur = rs.getString("NOM");
-						prenomConducteur = rs.getString("prenomConducteur");
-						datePublication = rs.getString("DATEPUBLICATION");
-						heureDepart = rs.getString("HEUREDEPART");
-						destination = rs.getString("DESTINATION");
-						prixParPassager = rs.getInt("PRIXPARPASSAGE");
-						nombrePassager = rs.getInt("NBPASSAGER");
-						depart = rs.getString("DEPART");
-						actif = rs.getInt("ACTIF");*/
-						%>
+
 				 Lieu de départ: <%out.print(depart); %>	<br>
 				 Lieu de destination: <%out.print(destination); %>	<br>
 				 Date de départ: <%out.print(depart); %>	<br>
 				 Conducteur principal: <%out.print(prenomConducteur + " " + nomConducteur); %>	<br>
-				 Heure de départ:	<br>
-				 Prix demandé par passagé (ce prix est basé selon la distance du voyage):	<br>
-				 Nombre de passager:	<br>
-				 Vous êtes présentement inscrit à ce voyage: <br>
+				 Heure de départ:	<%out.print(heureDepart); %><br>
+				 Prix demandé par passagé (ce prix est basé selon la distance du voyage): <%out.print(prixParPassager); %>$<br>
+				 Nombre de passager: <%out.print(nombrePassager); %>	<br>
+				<!--  Vous êtes présentement inscrit à ce voyage:  <% if (actif == 0){ out.print("non");} else { out.print("oui");} %><br>  -->
 				 
 				 </p>
 
 				 </div> 
-				 <form method=POST action=servletEnregistrementItineraire>
-				 <input type="hidden" name="idItineraire" value="<%idItineraire.toString();%>">
-				 <input type="number" name="nombreReservation" min="0" max="<% String.valueOf(nombrePassager); %>"><br>
+				 
+				 <form method=POST action=servletReservation>
+				 <input type="hidden" name="idItineraire" value="<%out.print(idItineraire.toString());%>">
+				 Nombre de réservation: <input type="number" name="nombreReservation" min="1" max=<%out.print(String.valueOf(nombrePassager));%>><br>
 				 <input type="submit" value="Réserver!">
 				 </form>
 	<%
-	System.out.println("4");
 			}
 			else
 			{
-				System.out.println("5");
 				out.println("<HTML>\n<BODY>\n"
 						+ "<H1>Vous avez sélectionné un voyage invalide! Attendez la redirection ...</H1>\n"
 						+ "</BODY></HTML>");

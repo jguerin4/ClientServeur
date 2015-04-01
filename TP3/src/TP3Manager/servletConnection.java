@@ -63,7 +63,6 @@ public class servletConnection extends HttpServlet {
 		String nomUtilisateur = (String) req.getParameter("user");
 		String motDePasse = (String) req.getParameter("password");
 
-		String msg;
 		try {
 			connectionBD = ConnectionManager.getInstance("connectionBD");
 

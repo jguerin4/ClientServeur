@@ -15,7 +15,7 @@
 </head>
 
 <body>
-		<%
+	<%
 		HttpSession session1 = request.getSession(true);
 		Object obj = session1.getAttribute("PrenomNom");
 		Object idUser = session1.getAttribute("Utilisateur");
@@ -27,11 +27,10 @@
 		{
 			out.println(mm.getMenu());
 		}
-		//session1.setAttribute("Utilisateur", "Marcel");
 	%>
 
 	<br>
-	<%if (idUser == null) { %>
+	<%if (idUser == null || obj == null) { %>
 	<h1 id="welcome" style="text-align: center">Bonjour visiteur, bienvenue dans la page
 		de gestion des voyages! Veuillez vous connecter dans la page connexion ou vous inscrire si vous n'avez pas de compte.</h1>
 	<br>
@@ -40,6 +39,35 @@
 		de gestion des voyages!</h1>
 	<br>
 	<%} %>
+	
+	<form method="post" action = "servletItineraire">
+		Date de départ format (YYYY-MM-JJ):<br>
+		<input type="text" name="i_date">
+		<br>
+		
+		Heure de départ exemple (18:45):<br>
+		<input type="test" name="i_heureDepart">
+		<br>
+		
+		Lieu de départ:<br>
+		<input type="test" name="i_lieuDepart">
+		<br>
+		
+		Destination:<br>
+		<input type="test" name="i_destination">
+		<br>
+		
+		Nombre de place disponible:<br>
+		<input type="test" name="i_placeDisponible">
+		<br>
+		
+		Prix par passager exigé (il est conseillé de baser le montant sur la distance à parcourir ):<br>
+		<input type="test" name="i_prixExige">
+		<br>
+		
+		<input type="submit" value="Valider!">
+
+	</form>
 
 </body>
 
