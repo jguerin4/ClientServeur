@@ -17,11 +17,9 @@
 <body>
 		<%
 		HttpSession session1 = request.getSession(true);
-		Object obj = session1.getAttribute("Utilisateur");
-		//out.println("L'utilisateur est :>");
-		//out.print(obj);
-
-		if (obj == null)
+		Object obj = session1.getAttribute("PrenomNom");
+		Object idUser = session1.getAttribute("Utilisateur");
+		if (idUser == null)
 		{
 			out.println(mm.getMenuNonConnecte());
 		}
@@ -33,7 +31,7 @@
 	%>
 
 	<br>
-	<%if (obj == null) { %>
+	<%if (idUser == null) { %>
 	<h1 id="welcome" style="text-align: center">Bonjour visiteur, bienvenue dans la page
 		des préférences du compte! Veuillez vous connecter dans la page connexion ou vous inscrire si vous n'avez pas de compte.</h1>
 	<br>
@@ -44,20 +42,19 @@
 	<%} %>
 <h4> Vous pouvez ici modifier les préférences de votre compte</h4>
 
-<form>
-	<input type="radio" name="fumeur" value="nonfumeur" checked>Je préfère voyager dans un véhicule sans fumeur 
+<form method=POST action=servletPreferences>
+	<input type="radio" name="fumeur" value=0 checked>Je préfère voyager dans un véhicule sans fumeur 
 	<br>
-	<input type="radio" name="fumeur" value="ouifumeur">Je n'ai pas d'objection à voyager dans un véhicule avec fumeurs 
+	<input type="radio" name="fumeur" value=1>Je n'ai pas d'objection à voyager dans un véhicule avec fumeurs 
 	<br>
 	<br>
-	<input type="radio" name="animaux" value="nonanimaux" checked>Je préfère voyager dans une voiture sans animaux 
+	<input type="radio" name="animaux" value=0 checked>Je préfère voyager dans une voiture sans animaux 
 	<br>
-	<input type="radio" name="animaux" value="ouianimaux">Je n'ai pas d'objection à voyager avec des animaux 
+	<input type="radio" name="animaux" value=1>Je n'ai pas d'objection à voyager avec des animaux 
 	<br><br>
 	<input type="submit" value="Modifier">
 </form>
 
-<!-- Possibilité de modifier le mot de passe au besoin! -->
 
 </body>
 

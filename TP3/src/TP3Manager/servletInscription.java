@@ -82,8 +82,42 @@ public class servletInscription extends HttpServlet {
 			connectionBD = ConnectionManager.getInstance("connectionBD");
 			Statement stmt = null;
 			connectionBD.setAutoCommit(false);
+			
+			if (!courriel.matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]"
+					+ "+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"))
+			{
+				out.println("<HTML>\n<BODY>\n"
+						+ "<H1>Inscription raté, le champs \"Courriel\" que vous avez entrée n'est pas valide! Attendez la redirection ...</H1>\n"
+						+ "</BODY></HTML>");
 
-			if (motDePasse.equals(confirmMDP)) {
+				res.setHeader("Refresh", "3; URL=inscription.jsp");
+			}
+			else if(!telephone.matches("(\\d-)?(\\d{3}-)?\\d{3}-\\d{4}"))
+			{
+				out.println("<HTML>\n<BODY>\n"
+						+ "<H1>Inscription raté, le champs \"Téléphone\" que vous avez entrée n'est pas valide! Attendez la redirection ...</H1>\n"
+						+ "</BODY></HTML>");
+
+				res.setHeader("Refresh", "3; URL=inscription.jsp");
+			}
+			else if(!birthday.matches("([0-9]{4}[/]{1}[0-9]{2}[/]{1}[0-9]{2})"))
+			{
+				out.println("<HTML>\n<BODY>\n"
+						+ "<H1>Inscription raté, le champs \"Date de Naissance\" que vous avez entrée n'est pas valide! Attendez la redirection ...</H1>\n"
+						+ "</BODY></HTML>");
+
+				res.setHeader("Refresh", "3; URL=inscription.jsp");
+			}
+			else if(motDePasse == "")
+			{
+				out.println("<HTML>\n<BODY>\n"
+						+ "<H1>Inscription raté, le champs \"Mot de passe\" que vous avez entrée n'est pas valide! Attendez la redirection ...</H1>\n"
+						+ "</BODY></HTML>");
+
+				res.setHeader("Refresh", "3; URL=inscription.jsp");
+				
+			}
+			else if (motDePasse.equals(confirmMDP)) {
 				requeteSql = "{call TP3CREERUSAGER(?,?,?,?,?,?,?,?,?)}";
 				callableStatement = connectionBD.prepareCall(requeteSql);
 				callableStatement.setString(1, nom);

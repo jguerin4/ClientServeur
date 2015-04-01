@@ -41,6 +41,7 @@ public class deconnectionServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session1 = request.getSession(true);
 		session1.setAttribute("Utilisateur", null);
+		session1.setAttribute("PrenomNom", null);
 		response.sendRedirect("index.jsp");
 	}
 

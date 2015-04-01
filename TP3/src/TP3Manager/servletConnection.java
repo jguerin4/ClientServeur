@@ -23,6 +23,8 @@ import TP3Manager.ConnectionManager;
 public class servletConnection extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static Connection connectionBD = null;
+	Statement stmt = null;
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -30,8 +32,6 @@ public class servletConnection extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -46,87 +46,82 @@ public class servletConnection extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(HttpServletRequest req,
-			HttpServletResponse res) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse res)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+
 		try {
 			System.out.println("Test ajout connexion");
 			ConnectionManager.ajouterConnection("connectionBD");
-			
+
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		
 		HttpSession session1 = req.getSession(true);
+		String nomUtilisateur = (String) req.getParameter("user");
+		String motDePasse = (String) req.getParameter("password");
 
-			System.out.println("Connexion");
-			
-				String nomUtilisateur = (String)req.getParameter("user");
-				String motDePasse = (String)req.getParameter("password");
-				
-				String msg;
-				try
-				{
-					//  ml   pwd =1234
-					connectionBD = ConnectionManager.getInstance("connectionBD");
-					Statement stmt = null;
-					
-					String nomUtilisateurForm = "'" + nomUtilisateur + "'";
-					String passwordForm = "'" + motDePasse + "'";
-					String sql = "SELECT IDCOMPTE, PSEUDO, MOTDEPASSE FROM TP3USAGER where PSEUDO =";
-					sql += nomUtilisateurForm;
-					sql += " and MOTDEPASSE =";
-					sql += passwordForm;
-					//sql += ";";
-					System.out.println(sql);	
-					stmt = connectionBD.createStatement();
-					ResultSet rs = stmt.executeQuery(sql);
-					
-					if (rs.next()) {
-						System.out.println("Tu as un compte et peut te connecter");
-						session1.setAttribute("Utilisateur", nomUtilisateur);
-		
-					} else {
-						System.out.println("Tu n'as pas de compte et ne peux te connecter");
-					}
-					//if nomUtilisateur == .......
-					rs.close();
-					stmt.close();
-					connectionBD.close();
-					res.sendRedirect("index.jsp");  
-					
+		String msg;
+		try {
+			connectionBD = ConnectionManager.getInstance("connectionBD");
+
+			String nomUtilisateurForm = "'" + nomUtilisateur + "'";
+			String passwordForm = "'" + motDePasse + "'";
+			String sql = "SELECT IDCOMPTE, PSEUDO, MOTDEPASSE,PRENOM,NOM FROM TP3USAGER where PSEUDO =";
+			sql += nomUtilisateurForm;
+			sql += " and MOTDEPASSE =";
+			sql += passwordForm;
+			// sql += ";";
+			System.out.println(sql);
+			stmt = connectionBD.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			int idUser;
+			String userPrenom = "";
+			String userNom = "";
+			if (rs.next()) {
+				System.out.println("Tu as un compte et peut te connecter");
+				try {
+					idUser = rs.getInt("IDCOMPTE");
+					userPrenom = rs.getString("PRENOM");
+					userNom = rs.getString("NOM");
+					session1.setAttribute("Utilisateur", idUser);
+					session1.setAttribute("PrenomNom", userPrenom + " "
+							+ userNom);
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-				catch(Exception e)
-				{
-					e.printStackTrace();			
-				}
+
+			} else {
+				System.out
+						.println("Tu n'as pas de compte et ne peux te connecter");
 			}
+			// if nomUtilisateur == .......
+			rs.close();
+			res.sendRedirect("index.jsp");
 
-
-		/*String msg;
-		PrintWriter out = res.getWriter();
-		if (req.getParameter("eat") != null)
-			msg = eat();
-		else if (req.getParameter("pick") != null)
-			msg = pick();
-		else {
-			res.sendError(HttpServletResponse.SC_BAD_REQUEST,
-					"Requete incomplete.");
-			return;
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		res.setContentType("text/html");
-		res.setHeader("pragma", "no cache");
-		out = res.getWriter();
-		out.println("<html><head><title>");
-		out.println("Le panier de pommes:");
-		out.println("</title></head><body><h4>");
-		out.println(msg);
-		out.println("</h4><hr>");
-		out.print("<ahref=\"");
-		out.print(req.getRequestURI()); // out.println("\">rejouer?</a><br>");
-										// out.close(); }*/
-	
+		
+		finally {
+			if (stmt != null)
+				try {
+					stmt.close();
+				} catch (Exception e) {
+					System.out.println(e.toString());
+				}
+			if (connectionBD != null)
+				try {
+					connectionBD.close();
+				} catch (Exception e) {
+					System.out.println(e.toString());
+				}
+		}
+		
+		
 	}
+
+
+}

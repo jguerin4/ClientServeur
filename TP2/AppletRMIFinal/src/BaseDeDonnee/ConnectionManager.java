@@ -32,6 +32,7 @@ public class ConnectionManager {
 
 		if (!hm.containsKey(nom)) {
 			try {
+				
 				Connection conn = DriverManager.getConnection(ConnStr,
 						ConnUser, ConnPwd);
 				hm.put(nom, conn);

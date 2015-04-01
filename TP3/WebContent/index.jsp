@@ -16,11 +16,9 @@
 <body>
 	<%
 		HttpSession session1 = request.getSession(true);
-		Object obj = session1.getAttribute("Utilisateur");
-		//out.println("L'utilisateur est :>");
-		//out.print(obj);
-
-		if (obj == null)
+		Object obj = session1.getAttribute("PrenomNom");
+		Object idUser = session1.getAttribute("Utilisateur");
+		if (idUser == null)
 		{
 			out.println(mm.getMenuNonConnecte());
 		}
@@ -28,11 +26,10 @@
 		{
 			out.println(mm.getMenu());
 		}
-		//session1.setAttribute("Utilisateur", "Marcel");
 	%>
 
 	<br>
-	<%if (obj == null) { %>
+	<%if (idUser == null || obj == null) { %>
 	<h1 id="welcome" style="text-align: center">Bonjour visiteur, bienvenue dans la page
 		d'acceuil! Veuillez vous connecter dans la page connexion ou vous inscrire si vous n'avez pas de compte.</h1>
 	<br>
